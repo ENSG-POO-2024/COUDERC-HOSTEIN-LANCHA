@@ -1,7 +1,13 @@
 import numpy as np
 import pandas as pd
+import matplotlib.image as img
 
-list_pokemon = pd.read_csv("data/pokemon_first_gen.csv", delimiter = ',')
+
+list_pokemon = pd.read_csv("../data/pokemon_first_gen.csv", delimiter = ',')
+position_pokemon = pd.read_csv("../data/pokemon_coordinates.csv", delimiter =',')
+
+
+a = img.imread('../data/carte.jpg')
 
 # file = pd.read_csv(filename, delimiter =';', skiprows = [i for i in range(11)])
 
@@ -41,11 +47,34 @@ class Pokemon_S :
         self.etat = 1
     
     def cacher(self):
-        self.etat = 0
-    
-    
+        self.etat = 0   
     
     
     def __str__(self):
         return self.nom
+
+
+class Carte :
+    def __init__(self,file):
+        
+class Vue :
+    def __init__(self,carte,x0,y0):
+        self.x = x0
+        self.y = y0
+    
+    
+    def deplacement(self,direction):
+        if direction == "h" :
+            self.y += 1
+        elif direction == "d" :
+            self.x += 1
+        elif direction == "b" :
+            self.y -= 1
+        elif direction == "g" :
+            self.x -= 1
+    
+    
+    def afficher(self):
+        
+    
     

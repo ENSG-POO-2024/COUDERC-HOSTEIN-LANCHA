@@ -9,7 +9,6 @@ position_pokemon = pd.read_csv("../data/pokemon_coordinates.csv", delimiter =','
 
 a = img.imread('../data/carte.jpg')
 
-# file = pd.read_csv(filename, delimiter =';', skiprows = [i for i in range(11)])
 
 
 class Red:

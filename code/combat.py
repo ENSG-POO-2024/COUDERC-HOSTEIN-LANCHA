@@ -47,13 +47,16 @@ class Pokemon:
         pui *= self.atk
         #les dégâts augmentent avec la statistique d'attaque du pokémon
         adv.degats(type_atk,pui)
-        #
     def degats(self,type_atk,pui):
         pui *= self.dfs
+        #les dégâts sont réduits par la statistique de défense
         pui *= efficiencies[types_dict[type_atk],types_dict[self.type1]]
+        pui *= efficiencies[types_dict[type_atk],types_dict[self.type2]]
+        #On calcule l'efficacité de l'attaque reçue en fonction des types du pokémon
         if pui >= self.pv:
             self.pv = 0
             self.ko = True
+            #Si l'attaque rend le pokemon KO, on met ses PV à 0 (pas de PV négatifs)
         else :
             self.pv = np.ceil(self.pv - pui)
 

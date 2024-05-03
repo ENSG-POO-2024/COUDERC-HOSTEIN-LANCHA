@@ -8,7 +8,7 @@ position_pokemon = pd.read_csv("../data/pokemon_coordinates.csv", delimiter =','
 
 
 a = img.imread('../data/carte.jpg')
-
+dd
 
 
 class Red:

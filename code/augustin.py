@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import matplotlib.image as img
 
 
@@ -8,7 +9,8 @@ position_pokemon = pd.read_csv("../data/pokemon_coordinates.csv", delimiter =','
 
 
 a = img.imread('../data/carte.jpg')
-dd
+plt.imshow(a)
+plt.show()
 
 
 class Red:
@@ -55,11 +57,14 @@ class Pokemon_S :
 
 class Carte :
     def __init__(self,file):
-        
+        pass
+    
+
 class Vue :
     def __init__(self,carte,x0,y0):
         self.x = x0
         self.y = y0
+        self.monde = carte
     
     
     def deplacement(self,direction):
@@ -74,6 +79,15 @@ class Vue :
     
     
     def afficher(self):
-        
-    
-    
+        pass
+
+
+
+h = img.imread("../data/img/h.png")
+p = img.imread("../data/img/p.png")
+
+plt.imshow(h)
+plt.show()
+
+plt.imshow(p)
+plt.show()

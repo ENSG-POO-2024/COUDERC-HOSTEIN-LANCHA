@@ -20,7 +20,8 @@ efficiencies = np.array([
     [1  ,0.5,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ,2  ,1  ,1  ,2  ,0.5,1  ],
     [0.5,2  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,1  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ]
     ])
-types_dict = 
+types_dict = {"steel":0,"fighting":1,"dragon":2,"water":3,"electric":4,"fire":5,"fairy":6,"ice":7,"bug":8,"normal":9,"grass":10,"poison":11,"psychic":12,"rock":13,"ground":14,"ghost":15,"dark":16,"flying":17}
+
 class Pokemon:
     def __init__(self,pv,atk,dfs,type1,type2 = None):
         self.type1 = type1

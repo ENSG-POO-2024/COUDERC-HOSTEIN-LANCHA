@@ -26,6 +26,13 @@ efficiencies = np.array([
 types_dict = {"steel":0,"fighting":1,"dragon":2,"water":3,"electric":4,"fire":5,"fairy":6,"ice":7,"bug":8,"normal":9,"grass":10,"poison":11,"psychic":12,"rock":13,"ground":14,"ghost":15,"dark":16,"flying":17,"neutral":18}
 #l'utilisation d'un dictionnaire avec des indices correspondant au tableau permet une correspondance entre types et efficacités des attaques
 
+def combat():
+    combat_fini = False
+    while not combat_fini:
+        
+        pass
+    pass
+
 class Pokemon:
     def __init__(self,pv,atk,dfs,type1,type2 = "neutral"):
         #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
@@ -67,14 +74,15 @@ class PokemonSauvage(Pokemon):
     def __init__(self):
         super().__init__()
 
-class combat:
+class Combat:
     def __init__(self,liste_pkmn,pkmn_sauvage):
         self.liste_pkmn = liste_pkmn
         self.pkmn_sauvage = pkmn_sauvage
         self.is_tour_joueur = True
         self.pokemon_actif = liste_pkmn[0]
     
-    def tour_joueur(self):
-        pass
+    
     def tour_sauvage(self):
         self.pkmn_sauvage.attaque("neutral",50,self.pokemon_actif)
+    
+    

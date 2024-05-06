@@ -69,7 +69,7 @@ class Vue:
         self.x = x0
         self.y = y0
         self.monde = carte
-        self.tuiles =  os.listdir("../data/img/")
+        self.tuiles =  os.listdir(os.path.join(path,"../data/img/"))
     
     
     def genere_matrice(self):
@@ -83,11 +83,11 @@ class Vue:
         matrice = self.genere_matrice()
         for i in range(matrice.shape[0]):
             for j in range(matrice.shape[1]):
-                result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread("../data/img/"+ self.tuiles[matrice[i, j]])# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
+                result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ self.tuiles[matrice[i, j]])# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
 
 
         plt.imshow(result)
-        plt.imsave("../data/map.jpg", result)
+        plt.imsave((os.path.join(path,"../data/map.jpg")), result)
         plt.axis('off')
         plt.show()
     
@@ -170,7 +170,7 @@ if __name__ == "__main__":
     #on parcourt et on concatene
     for i in range(matrix.shape[0]):
         for j in range(matrix.shape[1]):
-            terrain_complet[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread("../data/img/"+ str(matrix[i, j]) + ".png")
+            terrain_complet[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ str(matrix[i, j]) + ".png")
     
     plt.imshow(terrain_complet)
     plt.axis('off')

@@ -51,6 +51,7 @@ class Sac:
         return txt
 
 
+
     def changer_place(self, pokemon, nouvelle_place):
         # pour changer la place d'un pokemon dans le sac(attention la place du début est 0)
         if pokemon not in self.objets:
@@ -68,6 +69,8 @@ class Sac:
         # if pokemon.pv == 0:
         #     self.objets.append(pokemon)
         self.objets.append(pokemon)
+
+
 
 
 

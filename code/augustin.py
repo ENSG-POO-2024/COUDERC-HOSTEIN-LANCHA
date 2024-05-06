@@ -14,16 +14,7 @@ class Red:
         self.x = x
         self.y = y
         self.biome = terrain
-    
-    # def deplacement(self,direction):
-    #     if direction == "h" :
-    #         self.y += 1
-    #     elif direction == "d" :
-    #         self.x += 1
-    #     elif direction == "b" :
-    #         self.y -= 1
-    #     elif direction == "g" :
-    #         self.x -= 1
+
     def __str__(self):
         return "Hey ! Moi, c'est Red"
     
@@ -43,7 +34,6 @@ class Pokemon_S :
     
     def dist_perso (self, perso):
         return np.sqrt ((self.x - perso.x)**2 + (self.y - perso.y)**2)
-    
 
     
     def montrer (self):
@@ -72,7 +62,7 @@ class Carte :
 
 
 class Vue:
-    def __init__(self,carte,x0,y0):
+    def __init__(self,carte,x0,y0): # A modifier (doit dependre de la pos de red)
         self.x = x0
         self.y = y0
         self.monde = carte
@@ -209,7 +199,7 @@ if __name__ == "__main__":
             MAPP.deplacement("b")
         if KEYS_PRESSED == {'Up'}:
             MAPP.deplacement("h")
-        window.after(100,tache)
+        window.after(5,tache)
     window.after(10,tache)
     window.mainloop()
     

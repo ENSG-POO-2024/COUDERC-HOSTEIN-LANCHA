@@ -47,7 +47,7 @@ class ImageWindow(QMainWindow):
     def keyPressEvent(self, event):
 
         key = event.key()
-        print(f"Touche pressée : {key}")
+        # print(f"Touche pressée : {key}")
         if key == 16777235:
             self.map.deplacement("h")
         if key == 16777237:

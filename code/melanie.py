@@ -59,6 +59,7 @@ class Sac:
             self.objets[self.objets.index(pokemon)], self.objets[nouvelle_place] = self.objets[nouvelle_place], self.objets[self.objets.index(pokemon)]
 
 
+
     def changer_pokemon(self):
         #on veut changer de pokemon durant le combat
         pass

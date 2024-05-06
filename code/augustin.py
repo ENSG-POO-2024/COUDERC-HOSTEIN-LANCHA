@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.image as img
 import tkinter as tk
+import fenetreQT
+import sys
 
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
@@ -70,6 +72,7 @@ class Vue:
         self.y = y0
         self.monde = carte
         self.tuiles =  os.listdir(os.path.join(path,"../data/img/"))
+        self.map_init = (os.path.join(path,"../data/init.png"))
     
     
     def genere_matrice(self):
@@ -85,11 +88,10 @@ class Vue:
             for j in range(matrice.shape[1]):
                 result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ self.tuiles[matrice[i, j]])# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
 
-
+        
         plt.imshow(result)
         plt.imsave((os.path.join(path,"../data/map.jpg")), result)
-        plt.axis('off')
-        plt.show()
+        self.map_init = (os.path.join(path,"../data/map.jpg"))
     
     def deplacement(self,direction):
         x_max, y_max = self.monde.shape
@@ -112,30 +114,6 @@ class Vue:
 if __name__ == "__main__":
     
     
-    
-    # h = img.imread("../data/img/0.png")
-    # p = img.imread("../data/img/1.png")
-    
-    # plt.imshow(h)
-    # plt.show()
-    
-    # plt.imshow(p)
-    # plt.show()
-    
-    
-    
-    # img_conc = np.concatenate((h,p), axis=1)
-    # plt.imshow(img_conc)
-    # plt.axis('off')
-    # plt.show()
-    
-    
-    
-    # def conc (img1,img2,ax):
-    #     return np.concatenate((img1,img2),axis = 0)
-    
-    
-
     
     matrix = np.array([
         [0, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -176,35 +154,6 @@ if __name__ == "__main__":
     plt.axis('off')
     plt.show()
     
-    
-    
     MAPP = Vue(matrix,15,15)
-    window=tk.Tk()
 
-    
-    KEYS_PRESSED=set()
-    
-    def keypress_on(event):
-        KEYS_PRESSED.add(event.keysym)
-    
-    
-    def keypress_off(event):
-        KEYS_PRESSED.discard(event.keysym)
-    
-    window.bind("<KeyPress>", keypress_on)
-    window.bind("<KeyRelease>", keypress_off)
-    
-    def tache():
-        if KEYS_PRESSED == {'Right'}:
-            MAPP.deplacement("d")
-        if KEYS_PRESSED == {'Left'}:
-            MAPP.deplacement("g")
-        if KEYS_PRESSED == {'Down'}:
-            MAPP.deplacement("b")
-        if KEYS_PRESSED == {'Up'}:
-            MAPP.deplacement("h")
-        window.after(5,tache)
-    window.after(10,tache)
-    window.mainloop()
-    
     

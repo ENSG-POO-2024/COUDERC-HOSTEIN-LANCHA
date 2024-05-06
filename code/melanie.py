@@ -94,3 +94,95 @@ if __name__ == "__main__":
     print(sac_pokemon)
     sac_pokemon.changer_place(pokemon2, 2)
     print(sac_pokemon)
+
+
+
+
+
+
+
+## Partie avec QT Designer
+
+
+
+
+
+import sys
+#from ... import Ui_MainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication
+
+class XXXXWindow (QMainWindow, Ui_MainWindow):
+    def __init__(self, parent=None):
+        super(XXXXWindow, self).__init__(parent)
+        self.setupUi(self)
+# ...
+if __name__ == "__main__":
+    def run_app():
+        app = QApplication(sys.argv)
+        mainWin = XXXXXWindow()
+        mainWin.show()
+        app.exec_()
+    run_app()
+
+##
+
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from mon_fichier_ui import Ui_MainWindow
+
+class MyApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+
+if __name__ == "__main__":
+    app = QApplication([])
+    window = MyApp()
+    window.show()
+    app.exec_()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

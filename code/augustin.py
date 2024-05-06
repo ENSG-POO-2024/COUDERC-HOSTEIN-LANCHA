@@ -5,8 +5,11 @@ import matplotlib.pyplot as plt
 import matplotlib.image as img
 import tkinter as tk
 
-list_pokemon = pd.read_csv("../data/pokemon_first_gen.csv", delimiter = ',')
-position_pokemon = pd.read_csv("../data/pokemon_coordinates.csv", delimiter =',')
+path = os.path.dirname(os.path.abspath(__file__))
+print (path)
+
+list_pokemon = pd.read_csv(os.path.join(path, "../data/pokemon_first_gen.csv"), delimiter = ',')
+position_pokemon = pd.read_csv(os.path.join(path,"../data/pokemon_coordinates.csv"), delimiter =',')
 
 
 class Red:
@@ -84,6 +87,7 @@ class Vue:
 
 
         plt.imshow(result)
+        plt.imsave("../data/map.jpg", result)
         plt.axis('off')
         plt.show()
     

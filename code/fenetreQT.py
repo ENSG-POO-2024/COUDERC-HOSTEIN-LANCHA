@@ -22,6 +22,7 @@ class ImageWindow(QMainWindow):
     def __init__(self, vue):
         super().__init__()
         self.map= vue
+        self.combat = 0
         
     def initUI(self):
         super().__init__()
@@ -34,31 +35,45 @@ class ImageWindow(QMainWindow):
         self.label.setScaledContents(True)
         self.label.setGeometry(QtCore.QRect(50, 50, 800, 720))
         self.show()
+        
     
     def show_map(self):
-        pixmap = QPixmap(self.map.map_init)
-        self.label.setPixmap(pixmap)
-        self.label.setGeometry(30, 40, 721, 581)
-        self.label.setScaledContents(True)
-        self.label.setGeometry(QtCore.QRect(50, 50, 800, 720))
-        combat = self.map.hautes_herbes()
-        self.show()
+        if self.combat == 0 :
+                
+            pixmap = QPixmap(self.map.map_init)
+            self.label.setPixmap(pixmap)
+            self.label.setGeometry(30, 40, 721, 581)
+            self.label.setScaledContents(True)
+            self.label.setGeometry(QtCore.QRect(50, 50, 800, 720))
+            self.combat = self.map.hautes_herbes()
+            self.show()
+
+        
+        def show_combat (self):
+            if self.combat == 0 :
+                pass
+            pass
+        
+
         
         
     def keyPressEvent(self, event):
-
-        key = event.key()
-        # print(f"Touche pressée : {key}")
-        if key == 16777235:
-            self.map.deplacement("h")
-        if key == 16777237:
-            self.map.deplacement("b")
-        if key == 16777234:
-            self.map.deplacement("g")
-        if key == 16777236:
-            self.map.deplacement("d")
-        self.img = "../data/map.jpg"
-        self.show_map()
+        if self.combat == 0 :
+            key = event.key()
+            # print(f"Touche pressée : {key}")
+            if key == 16777235:
+                self.map.deplacement("h")
+            if key == 16777237:
+                self.map.deplacement("b")
+            if key == 16777234:
+                self.map.deplacement("g")
+            if key == 16777236:
+                self.map.deplacement("d")
+            self.img = "../data/map.jpg"
+            
+            self.show_map()
+        else :
+            self.label.hide()
 
 
 
@@ -91,7 +106,7 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ])
 
-    # matrix2 = np.genfromtxt("../data/terrain.csv", delimiter=';')
+    matrix2 = np.genfromtxt("../data/terrain.csv", delimiter=';',dtype=int)
     
     MAPP = augustin.Vue(matrix2,15,15)
     

@@ -66,10 +66,8 @@ class Vue:
     def hautes_herbes(self):
         if self.biome_red == 1 :
             if randint(1, 7) == 5:
-                print("oui")
                 return randint(1,151)
-            else:
-                return 0
+        return 0
     
     def deplacement(self,direction):
         x_max, y_max = self.monde.shape

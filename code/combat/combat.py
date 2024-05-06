@@ -4,21 +4,21 @@ efficiencies = np.array([
     [0.5,1  ,1  ,0.5,0.5,0.5,2  ,2  ,1  ,1  ,1  ,1  ,1  ,2  ,1  ,1  ,1  ,1  ,1  ],
     [2  ,1  ,1  ,1  ,1  ,1  ,0.5,2  ,0.5,2  ,1  ,0.5,0.5,2  ,1  ,0  ,2  ,0.5,1  ],
     [0.5,1  ,2  ,1  ,1  ,1  ,0  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ],
-    [1  ,1  ,0.5,0.5,2  ,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,2  ,1  ,1  ,1  ,1  ],
-    [1  ,1  ,0.5,2  ,1  ,0.5,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,0  ,1  ,1  ,2  ,1  ],
-    [2  ,1  ,0.5,0.5,0.5,1  ,1  ,2  ,2  ,1  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ],
-    [0.5,2  ,2  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,2  ,1  ,1  ],
-    [0.5,1  ,2  ,0.5,0.5,1  ,1  ,0.5,1  ,1  ,2  ,1  ,1  ,1  ,2  ,1  ,1  ,2  ,1  ],
-    [0.5,0.5,1  ,1  ,0.5,1  ,0.5,1  ,1  ,1  ,2  ,0.5,2  ,1  ,1  ,0.5,2  ,0.5,1  ],
+    [1  ,1  ,0.5,0.5,1  ,2  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,2  ,1  ,1  ,1  ,1  ],
+    [1  ,1  ,0.5,2  ,0.5,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,0  ,1  ,1  ,2  ,1  ],
+    [2  ,1  ,0.5,0.5,1  ,0.5,1  ,2  ,2  ,1  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ],
+    [0.5,2  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,2  ,1  ,1  ],
+    [0.5,1  ,2  ,0.5,1  ,0.5,1  ,0.5,1  ,1  ,2  ,1  ,1  ,1  ,2  ,1  ,1  ,2  ,1  ],
+    [0.5,0.5,1  ,1  ,1  ,0.5,0.5,1  ,1  ,1  ,2  ,0.5,2  ,1  ,1  ,0.5,2  ,0.5,1  ],
     [0.5,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,0.5,1  ,0  ,1  ,1  ,1  ],
-    [0.5,1  ,0.5,2  ,0.5,1  ,1  ,1  ,0.5,1  ,0.5,0.5,1  ,2  ,2  ,1  ,1  ,0.5,1  ],
+    [0.5,1  ,0.5,2  ,1  ,0.5,1  ,1  ,0.5,1  ,0.5,0.5,1  ,2  ,2  ,1  ,1  ,0.5,1  ],
     [0  ,1  ,1  ,1  ,1  ,1  ,2  ,1  ,1  ,1  ,2  ,0.5,1  ,0.5,0.5,0.5,1  ,1  ,1  ],
     [0.5,2  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,2  ,0.5,1  ,1  ,1  ,0  ,1  ,1  ],
-    [0.5,0.5,1  ,1  ,2  ,1  ,1  ,2  ,2  ,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,1  ],
+    [0.5,0.5,1  ,1  ,1  ,2  ,1  ,2  ,2  ,1  ,1  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,1  ],
     [2  ,1  ,1  ,1  ,2  ,2  ,1  ,1  ,0.5,1  ,0.5,2  ,1  ,2  ,1  ,1  ,1  ,0  ,1  ],
     [1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,0  ,1  ,1  ,2  ,1  ,1  ,2  ,0.5,1  ,1  ],
     [1  ,0.5,1  ,1  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ,2  ,1  ,1  ,2  ,0.5,1  ,1  ],
-    [0.5,2  ,1  ,1  ,1  ,0.5,1  ,1  ,2  ,1  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ],
+    [0.5,2  ,1  ,1  ,0.5,1  ,1  ,1  ,2  ,1  ,2  ,1  ,1  ,0.5,1  ,1  ,1  ,1  ,1  ],
     [1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ,1  ]
     ])
 #On a défini la table des classes à l'aide d'un array numpy.
@@ -26,12 +26,20 @@ efficiencies = np.array([
 types_dict = {"steel":0,"fighting":1,"dragon":2,"water":3,"electric":4,"fire":5,"fairy":6,"ice":7,"bug":8,"normal":9,"grass":10,"poison":11,"psychic":12,"rock":13,"ground":14,"ghost":15,"dark":16,"flying":17,"neutral":18}
 #l'utilisation d'un dictionnaire avec des indices correspondant au tableau permet une correspondance entre types et efficacités des attaques
 
+def combat():
+    combat_fini = False
+    while not combat_fini:
+        
+        pass
+    pass
+
 class Pokemon:
     def __init__(self,pv,atk,dfs,type1,type2 = "neutral"):
         #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
         self.type1 = type1
         self.type2 = type2
         self.pv = pv
+        self.pv_tot = pv
         self.atk = atk
         self.dfs = dfs
         #On a choisi d'ajouter des statistiques multiplicatives d'attaque et de défense qui permettent
@@ -47,17 +55,34 @@ class Pokemon:
         pui *= self.atk
         #les dégâts augmentent avec la statistique d'attaque du pokémon
         adv.degats(type_atk,pui)
-        #
     def degats(self,type_atk,pui):
         pui *= self.dfs
+        #les dégâts sont réduits par la statistique de défense
         pui *= efficiencies[types_dict[type_atk],types_dict[self.type1]]
+        pui *= efficiencies[types_dict[type_atk],types_dict[self.type2]]
+        #On calcule l'efficacité de l'attaque reçue en fonction des types du pokémon
         if pui >= self.pv:
             self.pv = 0
             self.ko = True
+            #Si l'attaque rend le pokemon KO, on met ses PV à 0 (pas de PV négatifs)
         else :
             self.pv = np.ceil(self.pv - pui)
 
-class combat:
+class PokemonSauvage(Pokemon):
+    #On crée une sous-classe spécifiquement pour les pokémon sauvages
+    #ceux-ci disposent en plus d'un taux de capture, et leur sprite est différent
+    def __init__(self):
+        super().__init__()
+
+class Combat:
     def __init__(self,liste_pkmn,pkmn_sauvage):
-        pass
-    def tour_joueur(self):
+        self.liste_pkmn = liste_pkmn
+        self.pkmn_sauvage = pkmn_sauvage
+        self.is_tour_joueur = True
+        self.pokemon_actif = liste_pkmn[0]
+    
+    
+    def tour_sauvage(self):
+        self.pkmn_sauvage.attaque("neutral",50,self.pokemon_actif)
+    
+    

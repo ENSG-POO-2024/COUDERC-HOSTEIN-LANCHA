@@ -3,10 +3,10 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as img
-import tkinter as tk
 import fenetreQT
 import sys
 from random import randint
+
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
 

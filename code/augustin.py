@@ -87,6 +87,7 @@ class Vue:
 
 
         plt.imshow(result)
+        plt.imsave("../data/map.jpg", result)
         plt.axis('off')
         plt.show()
     

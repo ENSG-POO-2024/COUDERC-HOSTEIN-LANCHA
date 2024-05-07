@@ -65,16 +65,16 @@ class ImageWindow(QMainWindow):
             key = event.key()
             # print(f"Touche pressée : {key}")
             
-            if key == 16777235 and tm.time() - self.start >  0.1 :
+            if key == 16777235 and tm.time() - self.start >  0.05 :
                 self.map.deplacement("h")
                 self.start = tm.time()
-            if key == 16777237 and tm.time() - self.start >  0.1:
+            if key == 16777237 and tm.time() - self.start >  0.05:
                 self.map.deplacement("b")
                 self.start = tm.time()
-            if key == 16777234 and tm.time() - self.start >  0.1:
+            if key == 16777234 and tm.time() - self.start >  0.05:
                 self.map.deplacement("g")
                 self.start = tm.time()
-            if key == 16777236 and tm.time() - self.start >  0.1:
+            if key == 16777236 and tm.time() - self.start >  0.05:
                 self.map.deplacement("d")
                 self.start = tm.time()
             self.img = "../data/map.jpg"

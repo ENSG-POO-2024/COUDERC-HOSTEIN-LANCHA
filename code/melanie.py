@@ -169,107 +169,283 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog, sac_pokemon):
         
         Dialog.setObjectName("Dialog")
-        Dialog.resize(500, 350)
+        Dialog.resize(470,370)
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Light, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Midlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Dark, brush)
+        brush = QtGui.QBrush(QtGui.QColor(170, 170, 170))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Mid, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.BrightText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Shadow, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ToolTipText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Light, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Midlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Dark, brush)
+        brush = QtGui.QBrush(QtGui.QColor(170, 170, 170))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Mid, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.BrightText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Shadow, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ToolTipText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Light, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Midlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Dark, brush)
+        brush = QtGui.QBrush(QtGui.QColor(170, 170, 170))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Mid, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127)
+                             )
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.BrightText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(127, 127, 127))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 220))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
+        Dialog.setPalette(palette)
+        Dialog.setAutoFillBackground(False)
+        #Dialog.setSizeGripEnabled(False)
+       # Dialog.setModal(False)
+       
+       #position horizontale, verticale, largeur, hauteur
+       
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(160, 20, 300, 21))
+        self.label.setGeometry(QtCore.QRect(50, 20, 500, 41))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.label.setFont(font)
         self.label.setObjectName("label")
+        self.listWidget = QtWidgets.QListWidget(Dialog)
+        self.listWidget.setGeometry(QtCore.QRect(30, 140, 200, 180))
+        self.listWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.listWidget.setObjectName("listWidget")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        # self.label_3 = QtWidgets.QLabel(Dialog)
+        # self.label_3.setGeometry(QtCore.QRect(200, 190, 35, 10))
+        # self.label_3.setText("")
+        # self.label_3.setObjectName("label_3")
+        
+        self.label_4 = QtWidgets.QLabel(Dialog)
+        self.label_4.setGeometry(QtCore.QRect(0, 90, 450, 270))
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap("../GitHub/COUDERC-HOSTEIN-LANCHA/data/img/combat/cadre.jpg"))
+        self.label_4.setScaledContents(True)
+        self.label_4.setObjectName("label_4")
         
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(60, 60, 300, 16))
+        self.label_2.setGeometry(QtCore.QRect(100, 55, 270, 50))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        
-        self.listWidget = QtWidgets.QListWidget(Dialog)
-        self.listWidget.setGeometry(QtCore.QRect(260, 60, 120, 180))
-        self.listWidget.setObjectName("listWidget")
-        
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget.addItem(item)
-        
-        self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(70, 190, 35, 10))
-        self.label_3.setText("")
-        self.label_3.setObjectName("label_3")
-        
-        # self.label_4 = QtWidgets.QLabel(Dialog)
-        # self.label_4.setGeometry(QtCore.QRect(0, 0, 561, 301))
-        # self.label_4.setText("")
-        # self.label_4.setPixmap(QtGui.QPixmap("3600x3600-light-sky-blue-solid-color-background.jpg"))
-        # self.label_4.setScaledContents(True)
-        # self.label_4.setObjectName("label_4")
-        
-        self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setGeometry(QtCore.QRect(110, 250, 61, 16))
-        self.label_5.setObjectName("label_5")
-        
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(180, 250, 30, 30))
-        self.pushButton.setObjectName("pushButton")
-        
-        # self.label_4.raise_()
+        self.label_4.raise_()
         self.label.raise_()
-        self.label_2.raise_()
         self.listWidget.raise_()
-        self.label_3.raise_()
-        self.label_5.raise_()
-        self.pushButton.raise_()
+        # self.label_3.raise_()
+        self.label_2.raise_()
 
         self.retranslateUi(Dialog, sac_pokemon)
-        self.pushButton.clicked.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-        
-      
 
     def retranslateUi(self, Dialog, sac_pokemon):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Sac contenant les Pokemon"))
         self.label.setText(_translate("Dialog", "VOUS AVEZ OUVERT LE SAC ! "))
-        self.label_2.setText(_translate("Dialog", "POKEMON DANS LE SAC :"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
           
         
         item = self.listWidget.item(0)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)))
+        item.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)) + ", " + str(sac_pokemon.objets[0].type1) + ", " + str(sac_pokemon.objets[0].pv))
         item = self.listWidget.item(1)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)))
+        item.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)) + ", " + str(sac_pokemon.objets[1].type1) + ", " + str(sac_pokemon.objets[1].pv))
         item = self.listWidget.item(2)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)))
+        item.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)) + ", " + str(sac_pokemon.objets[2].type1) + ", " + str(sac_pokemon.objets[2].pv))
         
         if len(sac_pokemon.objets) == 4:
         
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)))
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
             
         elif len(sac_pokemon.objets) == 5:
             
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)))
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
             item = self.listWidget.item(4)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)))
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))
             
         elif len(sac_pokemon.objets) == 6:
             
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)))
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
             item = self.listWidget.item(4)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom))) 
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv)) 
             item = self.listWidget.item(5)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)))
+            item.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)) + ", " + str(sac_pokemon.objets[5].type1) + ", " + str(sac_pokemon.objets[5].pv))
         
         self.listWidget.setSortingEnabled(__sortingEnabled)
-        self.label_5.setText(_translate("Dialog", "FERMER LE SAC"))
-        self.pushButton.setText(_translate("Dialog", "X"))
+        self.label_2.setText(_translate("Dialog", "CLIQUEZ SUR UN POKEMON"))
+
             
     
         

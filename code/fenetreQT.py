@@ -14,7 +14,7 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap
 import numpy as np
-
+import time as tm
 
 
 class ImageWindow(QMainWindow):
@@ -23,6 +23,7 @@ class ImageWindow(QMainWindow):
         super().__init__()
         self.map= vue
         self.combat = 0
+        self.start = tm.time()
         
     def initUI(self):
         super().__init__()
@@ -47,10 +48,11 @@ class ImageWindow(QMainWindow):
             self.label.setGeometry(QtCore.QRect(50, 50, 800, 720))
             self.combat = self.map.hautes_herbes()
             self.show()
+           
 
         
         def show_combat (self):
-            if self.combat == 0 :
+            if self.combat != 0 :
                 pass
             pass
         
@@ -59,16 +61,22 @@ class ImageWindow(QMainWindow):
         
     def keyPressEvent(self, event):
         if self.combat == 0 :
+            
             key = event.key()
             # print(f"Touche pressée : {key}")
-            if key == 16777235:
+            
+            if key == 16777235 and tm.time() - self.start >  0.1 :
                 self.map.deplacement("h")
-            if key == 16777237:
+                self.start = tm.time()
+            if key == 16777237 and tm.time() - self.start >  0.1:
                 self.map.deplacement("b")
-            if key == 16777234:
+                self.start = tm.time()
+            if key == 16777234 and tm.time() - self.start >  0.1:
                 self.map.deplacement("g")
-            if key == 16777236:
+                self.start = tm.time()
+            if key == 16777236 and tm.time() - self.start >  0.1:
                 self.map.deplacement("d")
+                self.start = tm.time()
             self.img = "../data/map.jpg"
             
             self.show_map()
@@ -106,16 +114,7 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ])
 
-    matrix2 = np.genfromtxt("../data/terrain.csv", delimiter=';',dtype=int)
-    
-    MAPP = augustin.Vue(matrix2,15,15)
-    
-    app = QApplication(sys.argv)
-    mainWindow = ImageWindow(MAPP)
-    mainWindow.initUI()
-    sys.exit(app.exec_())
-    
-    
+
     
     
 

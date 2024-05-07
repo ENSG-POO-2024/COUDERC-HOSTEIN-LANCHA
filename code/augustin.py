@@ -59,7 +59,7 @@ class Vue:
                 result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ str(matrice[i,j])+".png")# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
 
         
-        plt.imshow(result)
+        # plt.imshow(result)
         plt.imsave((os.path.join(path,"../data/map.jpg")), result)
         self.map_init = (os.path.join(path,"../data/map.jpg"))
     
@@ -83,8 +83,8 @@ class Vue:
         elif direction == "g" and self.y -5 > 0 :
             self.y -= 1
             self.genere_terrain()
-        else:
-            print("limite terrain")
+        # else:
+        #     print("limite terrain")
 
 
 
@@ -146,6 +146,6 @@ if __name__ == "__main__":
     plt.axis('off')
     plt.show()
     
-    MAPP = Vue(matrix,15,15)
+    # MAPP = Vue(matrix,15,15)
 
     A = Jouer(matrix)

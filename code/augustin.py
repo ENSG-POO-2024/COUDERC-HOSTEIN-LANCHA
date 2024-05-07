@@ -3,15 +3,16 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as img
-import tkinter as tk
 import fenetreQT
 import sys
+from random import randint
 
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
 
 list_pokemon = pd.read_csv(os.path.join(path, "../data/pokemon_first_gen.csv"), delimiter = ',')
 position_pokemon = pd.read_csv(os.path.join(path,"../data/pokemon_coordinates.csv"), delimiter =',')
+
 
 
 class Red:
@@ -26,39 +27,6 @@ class Red:
     def chg_biome (self,x,y):
         pass
     
-    
-
-
-class Pokemon_S :
-    
-    def __init__(self,x,y,etat,nom):
-        self.x = x
-        self.y = y
-        self.etat = etat
-        self.nom = nom
-    
-    def dist_perso (self, perso):
-        return np.sqrt ((self.x - perso.x)**2 + (self.y - perso.y)**2)
-
-    
-    def montrer (self):
-        self.etat = 1
-    
-    def cacher(self):
-        self.etat = 0   
-        
-    def est_proche(self, perso, d):
-
-        if self.dist_perso(perso) < d :
-            self.etat = 1
-            return True
-        return False
-    
-    
-    def __str__(self):
-        return self.nom
-
-
 
 class Carte :
     def __init__(self,matrice):
@@ -71,6 +39,7 @@ class Vue:
         self.x = x0
         self.y = y0
         self.monde = carte
+        self.biome_red = carte[x0,y0]
         self.tuiles =  os.listdir(os.path.join(path,"../data/img/"))
         self.map_init = (os.path.join(path,"../data/init.png"))
     
@@ -78,7 +47,8 @@ class Vue:
     def genere_matrice(self):
         
         matrice  = np.copy(self.monde[self.x - 4 : self.x + 5, self.y - 5 : self.y + 5])
-        matrice[4,4] = 2
+        self.biome_red = matrice[4,4]
+        matrice[4,4] = int(str(99) + str(self.biome_red))
         return matrice
     
     def genere_terrain (self):
@@ -86,12 +56,18 @@ class Vue:
         matrice = self.genere_matrice()
         for i in range(matrice.shape[0]):
             for j in range(matrice.shape[1]):
-                result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ self.tuiles[matrice[i, j]])# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
+                result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ str(matrice[i,j])+".png")# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
 
         
-        plt.imshow(result)
+        # plt.imshow(result)
         plt.imsave((os.path.join(path,"../data/map.jpg")), result)
         self.map_init = (os.path.join(path,"../data/map.jpg"))
+    
+    def hautes_herbes(self):
+        if self.biome_red == 1 :
+            if randint(1, 7) == 5:
+                return randint(1,151)
+        return 0
     
     def deplacement(self,direction):
         x_max, y_max = self.monde.shape
@@ -107,41 +83,57 @@ class Vue:
         elif direction == "g" and self.y -5 > 0 :
             self.y -= 1
             self.genere_terrain()
-        else:
-            print("limite terrain")
+        # else:
+        #     print("limite terrain")
 
+
+
+
+class Jouer () :
+    
+    def __init__(self, grille):
+        self.terrain = Vue(grille, 15, 15)
+        self.commencer()
+    
+    def commencer(self):
+        app = fenetreQT.QApplication(sys.argv)
+        mainWindow = fenetreQT.ImageWindow(self.terrain)
+        mainWindow.initUI()
+        sys.exit(app.exec_())
 
 if __name__ == "__main__":
     
     
     
-    matrix = np.array([
-        [0, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [0, 4, 4, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 4, 4, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [0, 0, 4, 4, 3, 0, 0, 3, 3, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
-        [0, 0, 0, 4, 4, 3, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1],
-        [0, 0, 0, 4, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
-        [0, 0, 0, 4, 4, 3, 0, 0, 3, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-        [0, 0, 0, 4, 4, 4, 3, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
-        [0, 0, 0, 0, 4, 4, 3, 3, 0, 1, 1, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 1, 0, 0, 0, 0, 0, 3, 3, 3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 3, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4],
-        [1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 0, 0, 4, 4, 4, 4, 4],
-        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
+    matrix2 = np.array([
+        [5, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [5, 4, 4, 5, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 1, 1, 1, 1],
+        [5, 4, 4, 5, 5, 5, 5, 5, 1, 1, 5, 1, 5, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 1, 1],
+        [5, 5, 4, 4, 3, 5, 5, 3, 3, 5, 5, 5, 5, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 1, 1],
+        [5, 5, 5, 4, 4, 3, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 5, 5, 5, 5, 5, 1, 1, 1],
+        [5, 5, 5, 4, 4, 3, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 5, 5, 5, 5, 5, 5, 1, 1],
+        [5, 5, 5, 4, 4, 3, 5, 5, 3, 1, 5, 5, 5, 5, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 1],
+        [5, 5, 5, 4, 4, 4, 3, 5, 5, 1, 5, 5, 5, 5, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 1],
+        [5, 5, 5, 5, 4, 4, 3, 3, 5, 1, 1, 1, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1],
+        [5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 5],
+        [5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+        [1, 5, 1, 5, 5, 5, 5, 5, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 3, 3],
+        [1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 4, 4, 4, 4, 4],
+        [1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 5, 5, 4, 4, 4, 4, 4],
+        [1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+        [1, 5, 5, 1, 5, 5, 5, 5, 5, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5],
+        [1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1],
+        [1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1],
+        [1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1],
+        [1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ])
+
+    matrix = np.genfromtxt("../data/terrain.csv", delimiter=';',dtype=int)
     
     #IMG Vide
     terrain_complet = np.zeros((16 * matrix.shape[0], 16 * matrix.shape[1], 4))
@@ -154,6 +146,6 @@ if __name__ == "__main__":
     plt.axis('off')
     plt.show()
     
-    MAPP = Vue(matrix,15,15)
+    # MAPP = Vue(matrix,15,15)
 
-    
+    A = Jouer(matrix)

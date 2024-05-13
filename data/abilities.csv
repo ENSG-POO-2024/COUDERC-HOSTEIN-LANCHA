@@ -10,13 +10,13 @@ ID,Name,Type,Nature,Power,Precision,PP
 9,Poing-Éclair,electric,spe,75,100,15
 10,Griffe,normal,phy,40,100,35
 11,Force Poigne,normal,phy,55,100,30
-12,Guillotine,normal,phy,90000,-,5
+12,Guillotine,normal,phy,90000,100,5
 13,Coupe-Vent,normal,phy,80,75,10
-14,Danse-Lames,normal,status,-,-,30
+14,Danse-Lames,normal,status,0,100,30
 15,Coupe,normal,phy,50,95,30
 16,Tornade,normal,phy,40,100,35
 17,Cru-Aile,flying,phy,35,100,35
-18,Cyclone,normal,status,-,85,20
+18,Cyclone,normal,status,0,85,20
 19,Vol,flying,phy,70,95,15
 20,Étreinte,normal,phy,15,75,20
 21,Souplesse,normal,phy,80,75,20
@@ -26,33 +26,33 @@ ID,Name,Type,Nature,Power,Precision,PP
 25,Ultimawashi,normal,phy,120,75,5
 26,Pied Sauté,fighting,phy,70,95,25
 27,Mawashi Geri,fighting,phy,60,85,15
-28,Jet de Sable,normal,status,-,100,15
+28,Jet de Sable,normal,status,0,100,15
 29,Coup d'Boule,normal,phy,70,100,15
 30,Koud'Korne,normal,phy,65,100,25
 31,Furie,normal,phy,15,85,20
-32,Empal'Korne,normal,phy,90000,-,5
+32,Empal'Korne,normal,phy,90000,100,5
 33,Charge,normal,phy,35,95,35
 34,Plaquage,normal,phy,85,100,15
 35,Ligotage,normal,phy,15,85,20
 36,Bélier,normal,phy,90,85,20
 37,Mania,normal,phy,90,100,20
 38,Damoclès,normal,phy,100,100,15
-39,Mimi-Queue,Normal,status,-,100,30
+39,Mimi-Queue,Normal,status,0,100,30
 40,Dard-Venin,poison,phy,15,100,35
 41,Double-Dard,bug,phy,25,100,20
 42,Dard-Nuée,bug,phy,14,85,20
-43,Groz'Yeux,Normal,status,-,100,30
+43,Groz'Yeux,Normal,status,0,100,30
 44,Morsure,Normal,phy,60,100,25
-45,Rugissement,Normal,status,-,100,40
-46,Hurlement,Normal,status,-,100,20
-47,Berceuse,Normal,status,-,55,15
-48,Ultrason,Normal,status,-,55,20
-49,Sonicboom,Normal,phy,-,90,20
-50,Entrave,Normal,status,-,55,20
+45,Rugissement,Normal,status,0,100,40
+46,Hurlement,Normal,status,0,100,20
+47,Berceuse,Normal,status,0,55,15
+48,Ultrason,Normal,status,0,55,20
+49,Sonicboom,Normal,phy,0,90,20
+50,Entrave,Normal,status,0,55,20
 51,Acide,poison,phy,40,100,30
 52,Flammèche,fire,spe,40,100,25
 53,Lance-Flamme,fire,spe,95,100,15
-54,Brume,ice,status,-,-,30
+54,Brume,ice,status,0,100,30
 55,Pistolet à O,water,spe,40,100,25
 56,Hydrocanon,water,spe,120,80,5
 57,Surf,water,spe,95,100,15
@@ -66,58 +66,58 @@ ID,Name,Type,Nature,Power,Precision,PP
 65,Bec Vrille,flying,phy,80,100,20
 66,Sacrifice,fighting,phy,80,80,25
 67,Balayage,fighting,phy,50,90,20
-68,Riposte,fighting,phy,-,100,20
-69,Frappe Atlas,fighting,phy,-,100,20
+68,Riposte,fighting,phy,0,100,20
+69,Frappe Atlas,fighting,phy,0,100,20
 70,Force,Normal,phy,80,100,15
 71,Vol-Vie,grass,spe,20,100,20
 72,Méga-Sangsue,grass,spe,40,100,10
-73,Vampigraine,grass,status,-,90,10
-74,Croissance,normal,status,-,-,40
+73,Vampigraine,grass,status,0,90,10
+74,Croissance,normal,status,0,100,40
 75,Tranch'Herbe,grass,spe,55,95,25
 76,Lance-Soleil,grass,spe,120,100,10
-77,Poudre Toxik,poison,status,-,75,35
-78,Para-Spore,grass,status,-,75,30
-79,Poudre Dodo,grass,status,-,75,15
+77,Poudre Toxik,poison,status,0,75,35
+78,Para-Spore,grass,status,0,75,30
+79,Poudre Dodo,grass,status,0,75,15
 80,Danse-Fleur,grass,spe,70,100,20
-81,Sécrétion,bug,status,-,95,40
-82,Draco-Rage,Dragon,spe,-,100,10
+81,Sécrétion,bug,status,0,95,40
+82,Draco-Rage,Dragon,spe,0,100,10
 83,Danseflamme,fire,spe,15,70,15
 84,Éclair,electric,spe,40,100,30
 85,Tonnerre,electric,spe,95,100,15
-86,Cage-Éclair,electric,status,-,100,20
+86,Cage-Éclair,electric,status,0,100,20
 87,Fatal-Foudre,electric,spe,120,70,10
 88,Jet-Pierres,rock,phy,50,65,15
 89,Séisme,ground,phy,100,100,10
 90,Abîme,ground,phy,90000,30,5
 91,Tunnel,ground,phy,100,100,10
-92,Toxik,poison,status,-,85,10
+92,Toxik,poison,status,0,85,10
 93,Choc Mental,psychic,spe,50,100,25
 94,Psyko,psychic,spe,90,100,10
-95,Hypnose,psychic,status,-,60,20
-96,Yoga,psychic,status,-,-,40
-97,Hâte,psychic,status,-,-,30
+95,Hypnose,psychic,status,0,60,20
+96,Yoga,psychic,status,0,100,40
+97,Hâte,psychic,status,0,100,30
 98,Vive-Attaque,normal,phy,40,100,30
 99,Frénésie,normal,phy,20,100,20
-100,Téléport,psychic,status,-,-,20
-101,Ténèbres,ghost,phy,-,100,15
-102,Copie,normal,status,-,100,10
-103,Grincement,normal,status,-,85,40
-104,Reflet,normal,status,-,-,15
-105,Soin,normal,status,-,-,20
-106,Armure,normal,status,-,-,30
-107,Lilliput,normal,status,-,-,20
-108,Brouillard,normal,status,-,100,20
-109,Onde Folie,ghost,status,-,100,10
-110,Repli,water,status,-,-,40
-111,Boul'Armure,normal,status,-,-,40
-112,Bouclier,psychic,status,-,-,30
-113,Mur Lumière,psychic,status,-,-,30
-114,Buée Noire,ice,status,-,-,30
-115,Protection,psychic,status,-,-,20
-116,Puissance,normal,status,-,-,30
-117,Patience,normal,phy,-,-,10
-118,Métronome,normal,status,-,-,10
-119,Mimique,flying,status,-,-,20
+100,Téléport,psychic,status,0,100,20
+101,Ténèbres,ghost,phy,0,100,15
+102,Copie,normal,status,0,100,10
+103,Grincement,normal,status,0,85,40
+104,Reflet,normal,status,0,100,15
+105,Soin,normal,status,0,100,20
+106,Armure,normal,status,0,100,30
+107,Lilliput,normal,status,0,100,20
+108,Brouillard,normal,status,0,100,20
+109,Onde Folie,ghost,status,0,100,10
+110,Repli,water,status,0,100,40
+111,Boul'Armure,normal,status,0,100,40
+112,Bouclier,psychic,status,0,100,30
+113,Mur Lumière,psychic,status,0,100,30
+114,Buée Noire,ice,status,0,100,30
+115,Protection,psychic,status,0,100,20
+116,Puissance,normal,status,0,100,30
+117,Patience,normal,phy,0,100,10
+118,Métronome,normal,status,0,100,10
+119,Mimique,flying,status,0,100,20
 120,Destruction,normal,phy,130,100,5
 121,Bomb'Œuf,normal,phy,100,75,10
 122,Léchouille,ghost,phy,20,100,30
@@ -127,40 +127,40 @@ ID,Name,Type,Nature,Power,Precision,PP
 126,Déflagration,fire,spe,120,85,5
 127,Cascade,water,spe,80,100,15
 128,Claquoir,water,spe,35,75,10
-129,Météores,normal,phy,60,-,20
+129,Météores,normal,phy,60,100,20
 130,Coud'Krâne,normal,phy,100,100,15
 131,Picanon,normal,phy,20,100,15
 132,Constriction,normal,phy,10,100,35
-133,Amnésie,psychic,status,-,-,20
-134,Télékinésie,psychic,status,-,80,15
-135,E-Coque,normal,status,-,100,10
+133,Amnésie,psychic,status,0,100,20
+134,Télékinésie,psychic,status,0,80,15
+135,E-Coque,normal,status,0,100,10
 136,Pied Voltige,fighting,phy,85,90,20
-137,Intimidation,normal,status,-,75,30
+137,Intimidation,normal,status,0,75,30
 138,Dévorève,psychic,spe,100,100,15
-139,Gaz Toxik,poison,status,-,55,40
+139,Gaz Toxik,poison,status,0,55,40
 140,Pilonnage,normal,phy,15,85,20
 141,Vampirisme,bug,phy,20,100,15
-142,Grobisou,normal,status,-,75,10
+142,Grobisou,normal,status,0,75,10
 143,Pique,flying,phy,140,90,5
-144,Morphing,normal,status,-,-,10
+144,Morphing,normal,status,0,100,10
 145,Écume,water,spe,20,100,30
 146,Uppercut,normal,phy,70,100,10
-147,Spore,grass,status,-,100,15
-148,Flash,normal,status,-,70,20
-149,Vague Psy,psychic,spe,-,80,15
-150,Trempette,normal,status,-,-,40
-151,Acidarmure,poison,status,-,-,40
+147,Spore,grass,status,0,100,15
+148,Flash,normal,status,0,70,20
+149,Vague Psy,psychic,spe,0,80,15
+150,Trempette,normal,status,0,100,40
+151,Acidarmure,poison,status,0,100,40
 152,Pince-Masse,water,spe,90,85,10
 153,Explosion,normal,phy,170,100,5
 154,Combo-Griffe,normal,phy,18,80,15
 155,Osmerang,ground,phy,100,90,10
-156,Repos,psychic,status,-,-,10
+156,Repos,psychic,status,0,100,10
 157,Éboulement,rock,phy,75,90,10
 158,Croc de Mort,normal,phy,80,90,15
-159,Affûtage,normal,status,-,-,30
-160,Adaptation,normal,status,-,-,30
+159,Affûtage,normal,status,0,100,30
+160,Adaptation,normal,status,0,100,30
 161,Triplattaque,normal,phy,80,100,10
-162,Croc Fatal,normal,phy,-,90,10
+162,Croc Fatal,normal,phy,0,90,10
 163,Tranche,normal,phy,70,100,20
-164,Clonage,normal,status,-,-,10
-165,Lutte,normal,phy,50,100,10
+164,Clonage,normal,status,0,100,10
+165,Lutte,neutral,phy,50,100,10

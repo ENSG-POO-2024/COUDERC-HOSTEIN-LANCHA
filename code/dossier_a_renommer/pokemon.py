@@ -1,5 +1,13 @@
 import types
 import numpy as np
+import pandas as pd
+
+
+# Chemin relatif du fichier
+chemin_fichier = "../data/abilities.csv"
+
+# Charger le fichier CSV dans un DataFrame
+donnees = pd.read_csv(chemin_fichier)
 
 class Pokemon:
     def __init__(self,pv,atk,atk_spe,dfs,dfs_spe,vit,liste_capacites,type1,type2 = "neutral"):

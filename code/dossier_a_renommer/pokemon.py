@@ -2,20 +2,24 @@ import types
 import numpy as np
 
 class Pokemon:
-    def __init__(self,pv,atk,dfs,liste_capacites,type1,type2 = "neutral"):
+    def __init__(self,pv,atk,atk_spe,dfs,dfs_spe,vit,liste_capacites,type1,type2 = "neutral"):
         #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
         self.type1 = type1
         self.type2 = type2
         self.pv = pv
         self.pv_tot = pv
         self.atk = atk
+        self.atk_spe = atk_spe
         self.dfs = dfs
+        self.dfs_spe = dfs_spe
+        self.vit = vit
         #On a choisi d'ajouter des statistiques multiplicatives d'attaque et de défense qui permettent
         #respectivement d'augmenter les dégâts infligés et de réduire les dégâts subis
         self.ko = False
         self.liste_capacites = liste_capacites
         
     def attaque(self,capacite,adv):
+        #à refaire avec la façon d'encoder les capacités
         #On utilise d'abord une fonction attaque dans le pokémon attaquant pour appliquer les éventuels modificateurs de dégâts liés au pokémon
         pui = capacite[1]
         print(pui)

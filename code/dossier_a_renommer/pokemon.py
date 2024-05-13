@@ -1,3 +1,6 @@
+import types
+import numpy as np
+
 class Pokemon:
     def __init__(self,pv,atk,dfs,liste_capacites,type1,type2 = "neutral"):
         #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
@@ -27,8 +30,8 @@ class Pokemon:
     def degats(self,type_atk,pui):
         pui *= self.dfs
         #les dégâts sont réduits par la statistique de défense
-        pui *= efficiencies[types_dict[type_atk],types_dict[self.type1]]
-        pui *= efficiencies[types_dict[type_atk],types_dict[self.type2]]
+        pui *= types.efficiencies[types.dic[type_atk],types.dic[self.type1]]
+        pui *= types.efficiencies[types.dic[type_atk],types.dic[self.type2]]
         #On calcule l'efficacité de l'attaque reçue en fonction des types du pokémon
         if pui >= self.pv:
             self.pv = 0
@@ -36,3 +39,9 @@ class Pokemon:
             #Si l'attaque rend le pokemon KO, on met ses PV à 0 (pas de PV négatifs)
         else :
             self.pv = np.ceil(self.pv - pui)
+
+class PokemonSauvage(Pokemon):
+    #On crée une sous-classe spécifiquement pour les pokémon sauvages
+    #ceux-ci disposent en plus d'un taux de capture, et leur sprite est différent
+    def __init__(self):
+        super().__init__()

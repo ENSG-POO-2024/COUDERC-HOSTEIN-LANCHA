@@ -43,10 +43,4 @@ def combat(liste_pkmn,pkmn_sauvage):
 
 
 
-
-class PokemonSauvage(Pokemon):
-    #On crée une sous-classe spécifiquement pour les pokémon sauvages
-    #ceux-ci disposent en plus d'un taux de capture, et leur sprite est différent
-    def __init__(self):
-        super().__init__()
     

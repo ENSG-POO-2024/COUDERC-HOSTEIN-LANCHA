@@ -14,14 +14,41 @@ path = os.path.dirname(os.path.abspath(__file__))
 print (path)
 
 
+
+
 class ImageWindow(QMainWindow):
+    """
+    Classe définissant la fenêtre principale de jeu
+    """
+    
     
     def __init__(self, vue):
+        """
+        
+
+        Parameters
+        ----------
+        vue : Vue
+            La map de jeu, de type Vue, qui contient les informations de terrain
+
+        Returns
+        -------
+        None.
+
+        """
         super().__init__()
         self.vue = vue
-        self.combat = 0
+        self.combat = 0     #Initialisation du combat
 
     def setupUI(self):
+        """
+        Initialise le jeu, en définissant les nouveaux attributs de la fenetre que sont les parties du jeu
+
+        Returns
+        -------
+        None.
+
+        """
         
         self.setWindowTitle('Pokemon')
         self.setGeometry(150, 150, 900, 820)
@@ -30,13 +57,19 @@ class ImageWindow(QMainWindow):
         
         # Génération des fenetre terrain et combat        
         self.terrain= c.Carte(self, self.vue)
-        self.fight = c.inter_combat(self)
+        self.fight = c.inter_combat(self, 25, 137)
+        
+        # On n'est pas en phase de combat, donc cacher l'interface
         self.fight.hide()
 
                 
         
     def keyPressEvent(self, event):
-        if self.combat == 0 :
+        """
+        définit les evts associés à la pression des touches
+
+        """
+        if self.combat == 0 :  # si on n'est pas en phase de combat
             
             
             # print(f"Touche pressée : {key}")
@@ -79,6 +112,7 @@ class Red:
 
 
 class Vue:
+    
     def __init__(self,carte,x0,y0): # A modifier (doit dependre de la pos de red)
         self.x = x0
         self.y = y0

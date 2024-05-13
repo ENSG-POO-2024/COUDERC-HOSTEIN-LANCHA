@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Chemin relatif du fichier
-chemin_fichier = "../data/abilities.csv"
+chemin_fichier = "../../data/abilities.csv"
 
 # Charger le fichier CSV dans un DataFrame
 donnees = pd.read_csv(chemin_fichier)

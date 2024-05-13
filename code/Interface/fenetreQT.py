@@ -9,12 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import augustin
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap
 import numpy as np
 import time as tm
+# import interface_combat
 
 
 class ImageWindow(QMainWindow):
@@ -26,7 +26,6 @@ class ImageWindow(QMainWindow):
         self.start = tm.time()
         
     def initUI(self):
-        super().__init__()
         self.setWindowTitle('Image Viewer')
         self.setGeometry(150, 150, 900, 820)
         self.label = QLabel(self)
@@ -54,7 +53,6 @@ class ImageWindow(QMainWindow):
         def show_combat (self):
             if self.combat != 0 :
                 pass
-            pass
         
 
         

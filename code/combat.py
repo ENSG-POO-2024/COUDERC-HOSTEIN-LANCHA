@@ -1,7 +1,6 @@
 import numpy as np
 from random import randint
-
-
+from pokemon import *
 
 
 def combat(liste_pkmn,pkmn_sauvage):
@@ -10,12 +9,12 @@ def combat(liste_pkmn,pkmn_sauvage):
     fuite = False
     capture = False
     while not combat_fini:
-        a = [0,1] #on gerera ça plus tard avec qt
+        a = [0,2] #on gerera ça plus tard avec qt
         #a est du type [int,int], le premier entier donne l'action a realiser (attaque,changer de pokemon,capture,fuite)
         #le second donne le detail de cette action (numero de l'attaque,du pokemon a changer)
         if a[0] == 0:
             print(0)
-            capacite = toutes_capacites[a[1]]
+            capacite = current_pokemon.liste_capacites[a[1]]
             print("a")
             print(capacite)
             print("b")

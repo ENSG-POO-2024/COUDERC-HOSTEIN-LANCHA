@@ -1,5 +1,5 @@
 import numpy as np
-from random import randint
+from random import randint,random
 from pokemon import *
 
 
@@ -7,6 +7,7 @@ def combat(liste_pkmn,pkmn_sauvage):
     current_pokemon = liste_pkmn[0]
     combat_fini = False
     fuite = False
+    tentatives_fuite = 0
     capture = False
     while not combat_fini:
         #il faut un input de a
@@ -24,11 +25,25 @@ def combat(liste_pkmn,pkmn_sauvage):
             #changer de pokemon
             pass
         elif a[0] == 2:
-            #2 indique une tentative de capture (le deuxieme int n'intervient pas)
-            capture = True
+            #2 indique une tentative de capture
+            #le deuxième int donne le type de poké ball a utiliser
+            #sa valeur (1, 1.5 ou 2) modifie la probabilité de capture
+            a = ((3 * pkmn_sauvage.pv_max - 2 * pkmn_sauvage.pv) * pkmn_sauvage.catchrate * a[1]) / 255
+            #La probabilité de capturer un pokémon dépend de ses points de vie maximum, de ses points de vie actuels, de son taux de capture
+            #et du type de ball utilisé pour tenter de le catpturer
+            if random() < a :
+                capture = True
+            else :
+                capture = False
         elif a[0] == 3:
-            #3 indique une tentative de fuite (le deuxieme int n'intervient pas)
-            fuite = True
+            #3 indique une tentative de fuite
+            #Le calcul de celle-ci dépend de la vitesse du pokémon utilise, de la vitesse du pokemon sauvage, et du nombre de tentatives de fuites déjà effectuées
+            F = ((current_pokemon.vit * 128) / pkmn_sauvage.vit) + (30 * tentatives_fuite)
+            if randint(0,255) < F :
+                fuite = True
+            else :
+                tentatives_fuite += 1
+                #plus on essaie, plus on a de chances de fuir
         if current_pokemon.ko :
             #si le pokemon actuel est ko, on change de pokemon, ou on tente une fuite
             combat_fini = True

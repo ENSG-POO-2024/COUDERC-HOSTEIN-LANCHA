@@ -8,10 +8,10 @@ Created on Tue May  7 15:02:15 2024
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QListWidget
 
 from fenetre1 import Ui_Dialog
-from fenetre1 import Ui_Dialog2
+
 
 import sys
 import numpy as np
@@ -167,13 +167,11 @@ class Sac:
 
     def capture_pokemon(self, pokemon):
         # on ne peut capturer le pokemon que si le combat a été gagné
-        capture = False
+        # capture = False
         if pokemon.pv == 0:
              self.objets.append(pokemon)
-             capture = True
-        return capture
-
-
+             # capture = True
+        # return capture
 
 
 class MyApp(QMainWindow):
@@ -182,44 +180,38 @@ class MyApp(QMainWindow):
         super().__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self, sac_pokemon)
-        
-        # pour que quand on clique sur un bouton, une nouvelle fenêtre s'affiche
-        self.ui.pushButton.clicked.connect(self.affich)
-        self.ui.pushButton_2.clicked.connect(self.affich)
-        self.ui.pushButton_3.clicked.connect(self.affich)
-        self.ui.pushButton_4.clicked.connect(self.affich)
-        self.ui.pushButton_5.clicked.connect(self.affich)
-        self.ui.pushButton_6.clicked.connect(self.affich)
-        
-        # on veut ensuite que quand on a clique sur le pokemon
-        # il soit à cet endroit dans la liste 
-        
-        
-        
-        
-        
-    def affich(self):
-        mainWin = XXXXDlg(self, sac_pokemon)
-        mainWin.exec()
 
-    # def reject(self):
-    #     super().reject()
+        self.ui.pushButton_1.clicked.connect(self.monter)
+        self.ui.pushButton_2.clicked.connect(self.descendre)
         
-    # def accept(self):
-    #     super().accept()
+    
+    
+        
+    def monter(self):
+         rang_selectionnes = [index.row() for index in self.ui.listWidget.selectedIndexes()]
+         for rang in rang_selectionnes :
+             if rang > 0:
+                 nouveau_rang = rang - 1
+                 self.ui.listWidget.insertItem(nouveau_rang, self.ui.listWidget.takeItem(rang))
+                 self.ui.listWidget.setCurrentRow(nouveau_rang)
+                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
+                 #print(sac_pokemon)
+                 
+        
+    def descendre(self):        
+         rang_selectionnes = [index.row() for index in self.ui.listWidget.selectedIndexes()]
+         for rang in reversed(rang_selectionnes) :
+             if rang < self.ui.listWidget.count()-1 :
+                 nouveau_rang = rang+1
+                 self.ui.listWidget.insertItem(nouveau_rang, self.ui.listWidget.takeItem(rang))
+                 self.ui.listWidget.setCurrentRow(nouveau_rang) 
+                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
+                 #print(sac_pokemon)
         
         
-class XXXXDlg(QDialog):
-
-    def __init__(self, parent=None, sac_pokemon=None):
-        super().__init__(parent)
-        self.ui = Ui_Dialog2()
-        self.ui.setupUi(self, sac_pokemon)
-        
-    # def accept(self):
-    #     super().accept()        
         
         
+       
         
 
 if __name__ == "__main__":
@@ -240,16 +232,7 @@ if __name__ == "__main__":
         
     run_app()
 
-    '''
-    def run_dlg():
-        dlg = QApplication(sys.argv)
-        mainWin = XXXXDlg(sac_pokemon)
-        mainWin.show()
-        dlg.exec_()
-        
-    run_dlg()
-    '''
-        
+
 
  
 

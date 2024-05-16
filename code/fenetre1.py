@@ -19,156 +19,131 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog(object):
+    
     def setupUi(self, Dialog, sac_pokemon):
+        
         Dialog.setObjectName("Dialog")
         Dialog.resize(453, 350)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        Dialog.setPalette(palette)
-        Dialog.setAutoFillBackground(False)
-        #Dialog.setSizeGripEnabled(False)
-        #Dialog.setModal(False)
+        # palette = QtGui.QPalette()
+        # brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        # brush.setStyle(QtCore.Qt.SolidPattern)
+        # palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
+        # Dialog.setPalette(palette)
+        # Dialog.setAutoFillBackground(False)
+        # Dialog.setAutoFillBackground(True)
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(50, 20, 500, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(30, 140, 200, 180))
-        self.label_3.setText("")
-        self.label_3.setObjectName("label_3")
+        self.label.raise_()
+        
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(0, 90, 405, 270))
         self.label_4.setText("")
         self.label_4.setPixmap(QtGui.QPixmap("../GitHub/COUDERC-HOSTEIN-LANCHA/data/img/combat/cadre.jpg"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
+        self.label_4.raise_()
+        
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(100, 55, 270, 50))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(30, 130, 150, 31))
-        self.pushButton.setObjectName("pushButton")
+        
+        self.listWidget = QtWidgets.QListWidget(Dialog)
+        self.listWidget.setGeometry(QtCore.QRect(120, 100, 210, 200))
+        self.listWidget.setObjectName("listWidget")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget.addItem(item)
+        self.listWidget.setSelectionMode(QtWidgets.QListWidget.SingleSelection)
+        
+        
+        self.pushButton_1 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_1.setGeometry(QtCore.QRect(60, 310 , 150, 31))
+        self.pushButton_1.setObjectName("push_button_1")
+        
+        
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(30, 170, 150, 31))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.setGeometry(QtCore.QRect(30, 210, 150, 31))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_4.setGeometry(QtCore.QRect(200, 130, 150, 31))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_5.setGeometry(QtCore.QRect(200, 170, 150, 31))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.pushButton_6 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_6.setGeometry(QtCore.QRect(200, 210, 150, 31))
-        self.pushButton_6.setObjectName("pushButton_6")
+        self.pushButton_2.setGeometry(QtCore.QRect(230, 310, 150, 31))
+        self.pushButton_2.setObjectName("push_button_2")
+        
+        
+        
+        # self.label.raise_()
         self.label_4.raise_()
-        self.label.raise_()
-        self.label_3.raise_()
         self.label_2.raise_()
-        self.pushButton.raise_()
+        self.pushButton_1.raise_()
         self.pushButton_2.raise_()
-        self.pushButton_3.raise_()
-        self.pushButton_4.raise_()
-        self.pushButton_5.raise_()
-        self.pushButton_6.raise_()
+       
+        
 
         self.retranslateUi(Dialog, sac_pokemon)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        QtCore.QMetaObject.connectSlotsByName(Dialog)        
+        
+        
+        
     def retranslateUi(self, Dialog, sac_pokemon):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+          _translate = QtCore.QCoreApplication.translate
+          Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+         
+          self.label.setText(_translate("Dialog", "VOUS AVEZ OUVERT LE SAC !"))
+          self.label_2.setText(_translate("Dialog", "CLIQUEZ SUR UN POKEMON"))
+         
+          self.pushButton_1.setText(_translate("Dialog", "Monter"))
+          self.pushButton_2.setText(_translate("Dialog", "Descendre"))
+          
+          __sortingEnabled = self.listWidget.isSortingEnabled()
+          self.listWidget.setSortingEnabled(False)
+          
+          item = self.listWidget.item(0)
+          item.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)) + ", " + str(sac_pokemon.objets[0].type1) + ", " + str(sac_pokemon.objets[0].pv))
+          
+          item = self.listWidget.item(1)
+          item.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)) + ", " + str(sac_pokemon.objets[1].type1) + ", " + str(sac_pokemon.objets[1].pv))
+         
+          item = self.listWidget.item(2)
+          item.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)) + ", " + str(sac_pokemon.objets[2].type1) + ", " + str(sac_pokemon.objets[2].pv))
+          
+         
+          if len(sac_pokemon.objets) == 4 :
+              item = self.listWidget.item(3)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+              
+          elif len(sac_pokemon.objets) == 5 :
+              item = self.listWidget.item(3)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+              item = self.listWidget.item(4)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))   
+         
+          elif len(sac_pokemon.objets) == 6 :   
+              item = self.listWidget.item(3)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+              item = self.listWidget.item(4)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))   
+              item = self.listWidget.item(5)
+              item.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)) + ", " + str(sac_pokemon.objets[5].type1) + ", " + str(sac_pokemon.objets[5].pv))   
         
-        self.label.setText(_translate("Dialog", "VOUS AVEZ OUVERT LE SAC !"))
-        self.label_2.setText(_translate("Dialog", "CLIQUEZ SUR UN POKEMON"))
+          self.listWidget.setSortingEnabled(__sortingEnabled)
         
-        self.pushButton.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)) + ", " + str(sac_pokemon.objets[0].type1) + ", " + str(sac_pokemon.objets[0].pv))
-        self.pushButton_2.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)) + ", " + str(sac_pokemon.objets[1].type1) + ", " + str(sac_pokemon.objets[1].pv))
-        self.pushButton_3.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)) + ", " + str(sac_pokemon.objets[2].type1) + ", " + str(sac_pokemon.objets[2].pv))
         
-        if len(sac_pokemon.objets) == 4 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-        
-        elif len(sac_pokemon.objets) == 5 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-            self.pushButton_5.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))
-        
-        elif len(sac_pokemon.objets) == 6 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-            self.pushButton_5.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))
-            self.pushButton_6.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)) + ", " + str(sac_pokemon.objets[5].type1) + ", " + str(sac_pokemon.objets[5].pv))
 
 
-class Ui_Dialog2(object):
-    def setupUi(self, Dialog, sac_pokemon):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(453, 350)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        Dialog.setPalette(palette)
-        self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(0, 90, 405, 270))
-        self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("../GitHub/COUDERC-HOSTEIN-LANCHA/data/img/combat/cadre.jpg"))
-        self.label_4.setScaledContents(True)
-        self.label_4.setObjectName("label_4")
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(20, 20, 370, 50))
-        self.label.setObjectName("label")
-        self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(30, 130, 150, 31))
-        self.pushButton.setDefault(False)
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(30, 170, 150, 31))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.setGeometry(QtCore.QRect(30, 210, 150, 31))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton_4 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_4.setGeometry(QtCore.QRect(200, 130, 150, 31))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_5.setGeometry(QtCore.QRect(200, 170, 150, 31))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.pushButton_6 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_6.setGeometry(QtCore.QRect(200, 210, 150, 31))
-        self.pushButton_6.setObjectName("pushButton_6")
 
-        self.retranslateUi(Dialog, sac_pokemon)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Dialog, sac_pokemon):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "Vous voulez changer de Pokémon : \n"
-" cliquez sur le pokémon que vous voulez échanger"))
-        self.pushButton.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)) + ", " + str(sac_pokemon.objets[0].type1) + ", " + str(sac_pokemon.objets[0].pv))
-        self.pushButton_2.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)) + ", " + str(sac_pokemon.objets[1].type1) + ", " + str(sac_pokemon.objets[1].pv))
-        self.pushButton_3.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)) + ", " + str(sac_pokemon.objets[2].type1) + ", " + str(sac_pokemon.objets[2].pv))
-        
-        if len(sac_pokemon.objets) == 4 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-        
-        elif len(sac_pokemon.objets) == 5 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-            self.pushButton_5.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))
-        
-        elif len(sac_pokemon.objets) == 6 :
-            self.pushButton_4.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
-            self.pushButton_5.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))
-            self.pushButton_6.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)) + ", " + str(sac_pokemon.objets[5].type1) + ", " + str(sac_pokemon.objets[5].pv))
         
         
 

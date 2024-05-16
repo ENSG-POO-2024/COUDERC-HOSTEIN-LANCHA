@@ -202,7 +202,7 @@ class Pokemon:
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
         #Les dégâts changent en fonction du type du pokémon adverse
-        if capacites["repeat"] :
+        if capacites["repeat"][num] :
             #Certaines capacités peuvent être lancées aléatoirement 2 à 5 fois
             #Dans ce cas, on multiplie simplement les dégâts infligés par un nombre
             #entre 2 et 5

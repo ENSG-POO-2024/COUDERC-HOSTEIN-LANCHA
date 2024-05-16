@@ -178,6 +178,8 @@ class Pokemon:
         	#num correspond à l'indice de l'attaque dans le dataframe "capacites"
         #Le calcul est assez laborieux, la formule est basée sur la page poképédia "calcul des dégâts", on utilise la mécanique de la 1ère génération
         
+        print(self.name + " utilise " + capacites["Name"][num])
+        
         type_atk = capacites["Type"][num]
         dmg = ((2 * self.lvl) / 5 + 2) * capacites["Power"][num]
         if capacites["Nature"][num] == "phy":
@@ -199,7 +201,6 @@ class Pokemon:
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
         #Les dégâts changent en fonction du type du pokémon adverse
-        
         if randint(0,99) < capacites["Precision"][num]:
             #On vérifie que l'attaque se lance, cela dépend de la précision de l'attaque
             #une précision de 70 par exemple signifie que l'attaque a 70% de chances de réussir
@@ -239,7 +240,7 @@ class Pokemon:
                     #idem pour la confusion
                     adv.status_duration = 4
         else:
-            print("echec")
+            print(self.name + " rate son attaque !")
             #TEST
         
     def degats(self,dmg):

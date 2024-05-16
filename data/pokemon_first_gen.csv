@@ -1,5 +1,5 @@
 #,Name,Type1,Type2,Total,HP,Attack,Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary,Move1,Move2,Move3,Move4,Catchrate
-1,Bulbizarre,Grass,Poison,318,45,49,49,65,65,45,1,False,1,2,3,4,45
+1,Bulbizarre,Grass,Poison,318,45,49,49,65,65,45,1,False,32,2,3,4,45
 2,Herbizarre,Grass,Poison,405,60,62,63,80,80,60,1,False,1,2,3,4,45
 3,Florizarre,Grass,Poison,525,80,82,83,100,100,80,1,False,1,2,3,4,45
 4,Salamèche,Fire,,309,39,52,43,60,50,65,1,False,1,2,3,4,45

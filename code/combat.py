@@ -56,6 +56,7 @@ def combat(liste_pkmn,wild_pokemon):
             #on verifie si le combat est fini
             combat_fini = True
         else :
+            #Le pokémon sauvage a toujours le même comportement, il utilise une attaque au hasard
             wild_pokemon.attaque(wild_pokemon.liste_capacites[randint(0,3)],current_pokemon)
 
 

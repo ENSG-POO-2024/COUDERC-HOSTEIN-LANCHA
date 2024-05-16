@@ -38,7 +38,14 @@ def number_to_pokemon(num):
         #On fait attention au cas où le pokémon n'aurait pas de second type
     else :
         type2 = "neutral"
-        
+    
+    if pd.isnull(liste_capacites[3]):
+        liste_capacites.pop()
+        if pd.isnull(liste_capacites[2]):
+            liste_capacites.pop()
+            if pd.isnull(liste_capacites[1]):
+                liste_capacites.pop()
+    
     pv = np.floor(((2 * pv * lvl) / 100) + lvl + 10)
     atk = np.floor(((2 * atk * lvl) / 100) + 5)
     atk_spe = np.floor(((2 * atk_spe * lvl) / 100) + 5)

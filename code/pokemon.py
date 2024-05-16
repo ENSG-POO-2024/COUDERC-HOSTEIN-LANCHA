@@ -188,7 +188,7 @@ class Pokemon:
         #Le calcul est assez laborieux, la formule est basée sur la page poképédia "calcul des dégâts", on utilise la mécanique de la 1ère génération
         
         print(self.name + " utilise " + capacites["Name"][num])
-        type_atk = capacites["Type"][num].str.lower()
+        type_atk = capacites["Type"][num]
         dmg = ((2 * self.lvl) / 5 + 2) * capacites["Power"][num]
         if capacites["Nature"][num] == "phy":
             dmg *= self.atk

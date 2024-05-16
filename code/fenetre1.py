@@ -20,36 +20,34 @@ import pandas as pd
 
 class Interface_sac(object):
     
-    def setupUi(self, Dialog, sac_pokemon):
+    def __init__(self, MainWindow, sac_pokemon):
         
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(800, 720)
-        
-        self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(214, 20, 372, 41))
+        self.sac_pokemon = sac_pokemon
+        self.label = QtWidgets.QLabel(MainWindow)
+        self.label.setGeometry(QtCore.QRect(276, 70, 372, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
         
-        self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(0, 110, 800, 500))
+        self.label_4 = QtWidgets.QLabel(MainWindow)
+        self.label_4.setGeometry(QtCore.QRect(50, 160, 800, 500))
         self.label_4.setText("")
         self.label_4.setPixmap(QtGui.QPixmap("../data/img/combat/cadre.jpg"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         self.label_4.raise_()
         
-        self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(276, 55, 247, 50))
+        self.label_2 = QtWidgets.QLabel(MainWindow)
+        self.label_2.setGeometry(QtCore.QRect(326, 105, 247, 50))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         
         
-        self.listWidget = QtWidgets.QListWidget(Dialog)
-        self.listWidget.setGeometry(QtCore.QRect(60, 200, 650, 330))
+        self.listWidget = QtWidgets.QListWidget(MainWindow)
+        self.listWidget.setGeometry(QtCore.QRect(110, 250, 650, 330))
         self.listWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.listWidget.setObjectName("listWidget")
         self.listWidget.setIconSize(QtCore.QSize(50, 50))
@@ -94,15 +92,18 @@ class Interface_sac(object):
         self.listWidget.setSelectionMode(QtWidgets.QListWidget.SingleSelection)
         
         
-        self.pushButton_1 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_1.setGeometry(QtCore.QRect(200, 645, 150, 40))
+        self.pushButton_1 = QtWidgets.QPushButton(MainWindow)
+        self.pushButton_1.setGeometry(QtCore.QRect(250, 695, 150, 40))
         self.pushButton_1.setObjectName("push_button_1")
         
         
-        self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(450, 645, 150, 40))
+        self.pushButton_2 = QtWidgets.QPushButton(MainWindow)
+        self.pushButton_2.setGeometry(QtCore.QRect(500, 695, 150, 40))
         self.pushButton_2.setObjectName("push_button_2")
         
+        self.pushButton_3 = QtWidgets.QPushButton(MainWindow)
+        self.pushButton_3.setGeometry(QtCore.QRect(375, 745, 150, 40))
+        self.pushButton_3.setObjectName("exit")
         
         self.label.raise_()
         self.label_2.raise_()
@@ -110,88 +111,89 @@ class Interface_sac(object):
         self.pushButton_2.raise_()
        
     
-        self.retranslateUi(Dialog, sac_pokemon)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)        
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)        
         
         
         
-    def retranslateUi(self, Dialog, sac_pokemon):
+    def retranslateUi(self, MainWindow):
           
         list_pokemon = pd.read_csv(("../data/pokemon_first_gen.csv"), delimiter = ',')
           
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        MainWindow.setWindowTitle(_translate("Dialog", "Dialog"))
        
         self.label.setText(_translate("Dialog", "VOUS AVEZ OUVERT LE SAC !"))
         self.label_2.setText(_translate("Dialog", "CLIQUEZ SUR UN POKEMON"))
        
         self.pushButton_1.setText(_translate("Dialog", "Monter"))
         self.pushButton_2.setText(_translate("Dialog", "Descendre"))
+        self.pushButton_3.setText(_translate("Dialog", "Fermer le sac"))
         
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         
         item = self.listWidget.item(0)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[0].nom)) + ", " + str(sac_pokemon.objets[0].type1) + ", " + str(sac_pokemon.objets[0].pv))
+        item.setText(_translate("Dialog", str(self.sac_pokemon.objets[0].nom)) + ", " + str(self.sac_pokemon.objets[0].type1) + ", " + str(self.sac_pokemon.objets[0].pv))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[0].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[0].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon)
         
         
         item = self.listWidget.item(1)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[1].nom)) + ", " + str(sac_pokemon.objets[1].type1) + ", " + str(sac_pokemon.objets[1].pv))
+        item.setText(_translate("Dialog", str(self.sac_pokemon.objets[1].nom)) + ", " + str(self.sac_pokemon.objets[1].type1) + ", " + str(self.sac_pokemon.objets[1].pv))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[1].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[1].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon)
           
        
         item = self.listWidget.item(2)
-        item.setText(_translate("Dialog", str(sac_pokemon.objets[2].nom)) + ", " + str(sac_pokemon.objets[2].type1) + ", " + str(sac_pokemon.objets[2].pv))
+        item.setText(_translate("Dialog", str(self.sac_pokemon.objets[2].nom)) + ", " + str(self.sac_pokemon.objets[2].type1) + ", " + str(self.sac_pokemon.objets[2].pv))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[2].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[2].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon)
         
        
-        if len(sac_pokemon.objets) == 4 :
+        if len(self.sac_pokemon.objets) == 4 :
             
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[3].nom)) + ", " + str(self.sac_pokemon.objets[3].type1) + ", " + str(self.sac_pokemon.objets[3].pv))
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)
             
-        elif len(sac_pokemon.objets) == 5 :
+        elif len(self.sac_pokemon.objets) == 5 :
             
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[3].nom)) + ", " + str(self.sac_pokemon.objets[3].type1) + ", " + str(self.sac_pokemon.objets[3].pv))
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)
             
             item = self.listWidget.item(4)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))   
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[4].nom)) + ", " + str(self.sac_pokemon.objets[4].type1) + ", " + str(self.sac_pokemon.objets[4].pv))   
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[4].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[4].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)
                 
-        elif len(sac_pokemon.objets) == 6 : 
+        elif len(self.sac_pokemon.objets) == 6 : 
             
             item = self.listWidget.item(3)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[3].nom)) + ", " + str(sac_pokemon.objets[3].type1) + ", " + str(sac_pokemon.objets[3].pv))
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[3].nom)) + ", " + str(self.sac_pokemon.objets[3].type1) + ", " + str(self.sac_pokemon.objets[3].pv))
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[3].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)
             
             item = self.listWidget.item(4)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[4].nom)) + ", " + str(sac_pokemon.objets[4].type1) + ", " + str(sac_pokemon.objets[4].pv))   
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[4].nom)) + ", " + str(self.sac_pokemon.objets[4].type1) + ", " + str(self.sac_pokemon.objets[4].pv))   
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[4].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[4].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)
             
             item = self.listWidget.item(5)
-            item.setText(_translate("Dialog", str(sac_pokemon.objets[5].nom)) + ", " + str(sac_pokemon.objets[5].type1) + ", " + str(sac_pokemon.objets[5].pv))   
+            item.setText(_translate("Dialog", str(self.sac_pokemon.objets[5].nom)) + ", " + str(self.sac_pokemon.objets[5].type1) + ", " + str(self.sac_pokemon.objets[5].pv))   
             icon = QtGui.QIcon()
-            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(sac_pokemon.objets[5].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon.addPixmap(QtGui.QPixmap("../data/sprites/face/" + str(list(list_pokemon.Name).index(str(self.sac_pokemon.objets[5].nom))+1) + ".jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             item.setIcon(icon)        
       
       
@@ -205,6 +207,7 @@ class Interface_sac(object):
         self.listWidget.show()
         self.pushButton_1.show()
         self.pushButton_2.show()
+        self.pushButton_3.show()
         
         
         
@@ -215,6 +218,7 @@ class Interface_sac(object):
         self.listWidget.hide()
         self.pushButton_1.hide()
         self.pushButton_2.hide()
+        self.pushButton_3.hide()
         
         
 

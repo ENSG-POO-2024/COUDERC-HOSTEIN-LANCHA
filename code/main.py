@@ -9,7 +9,8 @@ import carte_combat as c
 from random import randint
 import matplotlib.pyplot as plt
 import matplotlib.image as img
-import melanie
+import fenetre1 as sac_inter
+from melanie import *
 
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
@@ -23,7 +24,7 @@ class ImageWindow(QMainWindow):
     """
     
     
-    def __init__(self, vue):
+    def __init__(self, vue, sac_pokemon):
         """
         
 
@@ -39,6 +40,7 @@ class ImageWindow(QMainWindow):
         """
         super().__init__()
         self.vue = vue
+        self.sac_pokemon = sac_pokemon
         self.combat = 0     #Initialisation du combat
 
     def setupUI(self):
@@ -63,7 +65,8 @@ class ImageWindow(QMainWindow):
         
         # Génération du sac
         
-        self.sac = melanie.Sac()
+        self.sac = sac_inter.Interface_sac(self, self.sac_pokemon)
+        self.sac.hide()
         
         # On n'est pas en phase de combat, donc cacher l'interface
         self.fight.hide()
@@ -71,8 +74,7 @@ class ImageWindow(QMainWindow):
         
         # boutons du combat
         
-        self.fight.pushButton_4.clicked.connect(self.fuir)
-        # self.fight.pushButton_3.clicked.connect(self.sac)s
+        self.button_action()
         
         
     def fuir(self):
@@ -80,8 +82,17 @@ class ImageWindow(QMainWindow):
         self.setupUI()
         
 
-                
-        
+    def close_sac(self):
+        self.sac.hide()
+        if self.combat == 0:
+            self.setupUI()
+        else:
+            self.fight.show(25, self.combat)
+    
+    def open_sac(self):
+        self.fight.hide()
+        self.sac.show()
+    
     def keyPressEvent(self, event):
         """
         définit les evts associés à la pression des touches
@@ -107,11 +118,14 @@ class ImageWindow(QMainWindow):
                     self.start = tm.time()
                 self.img = "../data/map.jpg"
                 
+                self.terrain.show_map()
+                
                 if key == 83 :
                     self.terrain.hide()
                     self.sac.show()
+                    
                 
-                self.terrain.show_map()
+                
                 self.combat = self.terrain.combat
             else :
                 pass
@@ -120,8 +134,40 @@ class ImageWindow(QMainWindow):
             self.terrain.hide()
             print(self.combat)
             self.fight.show(25, self.combat)
-
-
+            
+            
+    def monter(self):
+         rang_selectionnes = [index.row() for index in self.sac.listWidget.selectedIndexes()]
+         for rang in rang_selectionnes :
+             if rang > 0:
+                 nouveau_rang = rang - 1
+                 self.sac.listWidget.insertItem(nouveau_rang, self.sac.listWidget.takeItem(rang))
+                 self.sac.listWidget.setCurrentRow(nouveau_rang)
+                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
+                 #print(sac_pokemon)
+                 
+        
+    def descendre(self):        
+         rang_selectionnes = [index.row() for index in self.sac.listWidget.selectedIndexes()]
+         for rang in reversed(rang_selectionnes) :
+             if rang < self.sac.listWidget.count()-1 :
+                 nouveau_rang = rang+1
+                 self.sac.listWidget.insertItem(nouveau_rang, self.sac.listWidget.takeItem(rang))
+                 self.sac.listWidget.setCurrentRow(nouveau_rang) 
+                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
+                 #print(sac_pokemon)
+    
+    def button_action(self):
+        
+        self.fight.pushButton_4.clicked.connect(self.fuir)
+        self.sac.pushButton_1.clicked.connect(self.monter)
+        self.sac.pushButton_2.clicked.connect(self.descendre)
+        self.sac.pushButton_3.clicked.connect(self.close_sac)
+        self.fight.pushButton_3.clicked.connect(self.open_sac)
+        
+    
+    
+    
 class Red:
     def __init__(self,x,y, terrain):
         self.x = x
@@ -222,10 +268,20 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     ])
     matrix = np.genfromtxt((os.path.join(path,"../data/terrain.csv")), delimiter=';',dtype=int)
-
+    
+    
+    
+    sac_pokemon = Sac()
+    pokemon1 = Pokemon("Sabelette", 0, 45, 48, [0, 1], "Ground")
+    pokemon2 = Pokemon("Pikachu", 0, 45, 48, [0, 1], "Fairy")
+    pokemon3 = Pokemon("Abo", 0, 45, 48, [0, 1], "Rock")
+    sac_pokemon.capture_pokemon(pokemon1)
+    sac_pokemon.capture_pokemon(pokemon2)
+    sac_pokemon.capture_pokemon(pokemon3)
+    
     MAPP = Vue(matrix,15,15)
     app = QtWidgets.QApplication(sys.argv)
-    ui = ImageWindow(MAPP)
+    ui = ImageWindow(MAPP, sac_pokemon)
     ui.setupUI()
     ui.show()
     sys.exit(app.exec_())

@@ -22,7 +22,7 @@ Vol,flying,phy,70,95,15,0,0,normal,0,0,normal,False
 Souplesse,normal,phy,80,75,20,0,0,normal,0,0,normal,True
 Fouet Lianes,grass,spe,35,100,10,0,0,normal,0,0,normal,True
 Écrasement,normal,phy,65,100,20,0,0,normal,0,0,normal,True
-Double Pied,fighting,phy,60,100,30,0,0,normal,0,0,normal,False
+Double Pied,fighting,phy,60,100,30,0,0,normal,0,0,normal,True
 Ultimawashi,normal,phy,120,75,5,0,0,normal,0,0,normal,True
 Pied Sauté,fighting,phy,70,95,25,0,0,normal,0,0,normal,True
 Mawashi Geri,fighting,phy,60,85,15,0,0,normal,0,0,normal,True

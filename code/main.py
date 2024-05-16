@@ -89,6 +89,7 @@ class ImageWindow(QMainWindow):
         self.button_action()
         
         
+        
     def fuir(self):
         self.combat = 0
         self.fight.hide()

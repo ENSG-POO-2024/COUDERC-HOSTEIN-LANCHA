@@ -6,6 +6,7 @@ from pokemon import *
 
 
 
+
 class Combat :
     
     def __init__(self, liste_pkmn):

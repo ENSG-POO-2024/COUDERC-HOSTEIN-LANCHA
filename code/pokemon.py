@@ -40,11 +40,11 @@ def number_to_pokemon(num):
         type2 = "neutral"
     
     if pd.isnull(liste_capacites[3]):
-        liste_capacites.pop()
+        liste_capacites[3] = 149
         if pd.isnull(liste_capacites[2]):
-            liste_capacites.pop()
+            liste_capacites[2] = 149
             if pd.isnull(liste_capacites[1]):
-                liste_capacites.pop()
+                liste_capacites[1] = 149
     
     pv = np.floor(((2 * pv * lvl) / 100) + lvl + 10)
     atk = np.floor(((2 * atk * lvl) / 100) + 5)

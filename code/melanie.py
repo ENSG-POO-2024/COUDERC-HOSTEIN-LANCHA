@@ -17,6 +17,8 @@ import sys
 import numpy as np
 from random import randint
 
+# import pokemon
+# import types_pkm
 
 toutes_capacites = np.array([
     ["charge"           ,1  ,"normal"   ,100],
@@ -139,6 +141,7 @@ class PokemonSauvage(Pokemon):
 class Sac:
 
     def __init__(self):
+        # on initialise le sac avec 3 pokemon initiaux
         Clefairy = Pokemon("Roucool", 70, 45, 48, [0, 1], "Normal")
         Vulpix = Pokemon("Galopa", 38, 41, 40, [0, 1], "Fire")
         Seel = Pokemon("Tortank", 65, 45, 55, [0, 1], "Water")
@@ -146,6 +149,7 @@ class Sac:
 
 
     def __str__(self):
+        # pour afficher les pokemon présents dans le sac
         txt = "Le sac contient : "
         for obj in self.objets:
             txt += str(obj.nom)
@@ -161,17 +165,12 @@ class Sac:
             self.objets[self.objets.index(pokemon)], self.objets[nouvelle_place] = self.objets[nouvelle_place], self.objets[self.objets.index(pokemon)]
 
 
-    def changer_pokemon(self):
-        #on veut changer de pokemon durant le combat
-        pass
-
     def capture_pokemon(self, pokemon):
         # on ne peut capturer le pokemon que si le combat a été gagné
-        # capture = False
+        # c'est-à-dire quand le pokemon advserse a 0 pv
         if pokemon.pv == 0:
              self.objets.append(pokemon)
-             # capture = True
-        # return capture
+
 
 
 class MyApp(QMainWindow):
@@ -184,8 +183,7 @@ class MyApp(QMainWindow):
         self.ui.pushButton_1.clicked.connect(self.monter)
         self.ui.pushButton_2.clicked.connect(self.descendre)
         
-    
-    
+     
         
     def monter(self):
          rang_selectionnes = [index.row() for index in self.ui.listWidget.selectedIndexes()]

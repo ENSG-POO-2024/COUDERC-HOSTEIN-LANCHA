@@ -10,7 +10,7 @@ Created on Tue May  7 15:02:15 2024
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QListWidget
 
-from fenetre1 import Ui_Dialog
+from fenetre1 import Interface_sac
 
 
 import sys
@@ -139,9 +139,9 @@ class PokemonSauvage(Pokemon):
 class Sac:
 
     def __init__(self):
-        Clefairy = Pokemon("Clefairy", 70, 45, 48, [0, 1], "Fairy")
-        Vulpix = Pokemon("Vulpix", 38, 41, 40, [0, 1], "Fire")
-        Seel = Pokemon("Seel", 65, 45, 55, [0, 1], "Water")
+        Clefairy = Pokemon("Roucool", 70, 45, 48, [0, 1], "Normal")
+        Vulpix = Pokemon("Galopa", 38, 41, 40, [0, 1], "Fire")
+        Seel = Pokemon("Tortank", 65, 45, 55, [0, 1], "Water")
         self.objets = [Clefairy, Vulpix, Seel]
 
 
@@ -178,7 +178,7 @@ class MyApp(QMainWindow):
 
     def __init__(self, sac_pokemon):
         super().__init__()
-        self.ui = Ui_Dialog()
+        self.ui = Interface_sac()
         self.ui.setupUi(self, sac_pokemon)
 
         self.ui.pushButton_1.clicked.connect(self.monter)
@@ -217,9 +217,9 @@ class MyApp(QMainWindow):
 if __name__ == "__main__":
     
     sac_pokemon = Sac()
-    pokemon1 = Pokemon("Ponita", 0, 45, 48, [0, 1], "Fire")
-    pokemon2 = Pokemon("Dratini", 0, 45, 48, [0, 1], "Fairy")
-    pokemon3 = Pokemon("Magmar", 0, 45, 48, [0, 1], "Rock")
+    pokemon1 = Pokemon("Sabelette", 0, 45, 48, [0, 1], "Ground")
+    pokemon2 = Pokemon("Pikachu", 0, 45, 48, [0, 1], "Fairy")
+    pokemon3 = Pokemon("Abo", 0, 45, 48, [0, 1], "Rock")
     sac_pokemon.capture_pokemon(pokemon1)
     sac_pokemon.capture_pokemon(pokemon2)
     sac_pokemon.capture_pokemon(pokemon3)

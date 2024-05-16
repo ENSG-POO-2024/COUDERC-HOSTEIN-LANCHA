@@ -179,7 +179,6 @@ class Pokemon:
         #Le calcul est assez laborieux, la formule est basée sur la page poképédia "calcul des dégâts", on utilise la mécanique de la 1ère génération
         
         print(self.name + " utilise " + capacites["Name"][num])
-        
         type_atk = capacites["Type"][num]
         dmg = ((2 * self.lvl) / 5 + 2) * capacites["Power"][num]
         if capacites["Nature"][num] == "phy":
@@ -201,6 +200,19 @@ class Pokemon:
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
         #Les dégâts changent en fonction du type du pokémon adverse
+        if capacites["repeat"] :
+            #Certaines capacités peuvent être lancées aléatoirement 2 à 5 fois
+            #Dans ce cas, on multiplie simplement les dégâts infligés par un nombre
+            #entre 2 et 5
+            r = random()
+            if r < 0.375:
+                dmg *= 2
+            elif r < 0.75:
+                dmg *= 3
+            elif r < 0.875:
+                dmg *= 4
+            else :
+                dmg *= 5
         if randint(0,99) < capacites["Precision"][num]:
             #On vérifie que l'attaque se lance, cela dépend de la précision de l'attaque
             #une précision de 70 par exemple signifie que l'attaque a 70% de chances de réussir
@@ -239,6 +251,8 @@ class Pokemon:
                 if capacites["newstatus"][num] == "confused":
                     #idem pour la confusion
                     adv.status_duration = 4
+            if capacites["heal"][num]:
+                self.heal(self.pv_max / 2)
         else:
             print(self.name + " rate son attaque !")
             #TEST

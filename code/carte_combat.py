@@ -51,6 +51,7 @@ class Carte():
 
 class inter_combat ():
     def __init__(self, MainWindow, pok1, pok2):
+        
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -411,7 +412,13 @@ class inter_combat ():
         self.pushButton_4.hide()
         self.label_5.hide()
     
-    def show(self):
+    def show(self, pok1, pok2):
+        _translate = QtCore.QCoreApplication.translate
+        print(list_pokemon.Name[pok2])
+        self.P1.setPixmap(QtGui.QPixmap("../data/sprites/dos/"+str(pok1)+".jpg"))
+        self.P2.setPixmap(QtGui.QPixmap("../data/sprites/face/"+str(pok2)+".jpg"))
+        self.P1_N.setText(_translate("MainWindow", list_pokemon.Name[pok1]))
+        self.P2_N.setText(_translate("MainWindow", list_pokemon.Name[pok2]))
         self.P1.show()
         self.P1_N.show()
         self.P2.show()
@@ -429,7 +436,7 @@ class inter_combat ():
         self.pushButton_3.show()
         self.pushButton_4.show()
         self.label_5.show()
-    
+
 
 
 

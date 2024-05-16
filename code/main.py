@@ -9,6 +9,7 @@ import carte_combat as c
 from random import randint
 import matplotlib.pyplot as plt
 import matplotlib.image as img
+import melanie
 
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
@@ -49,18 +50,35 @@ class ImageWindow(QMainWindow):
         None.
 
         """
-        
         self.setWindowTitle('Pokemon')
         self.setGeometry(150, 150, 900, 820)
 
         self.start = tm.time()
         
         # Génération des fenetre terrain et combat        
-        self.terrain= c.Carte(self, self.vue)
+        self.terrain= c.Carte(self, self.vue)        
+        
+        self.terrain.show_map()
         self.fight = c.inter_combat(self, 25, 137)
+        
+        # Génération du sac
+        
+        self.sac = melanie.Sac()
         
         # On n'est pas en phase de combat, donc cacher l'interface
         self.fight.hide()
+        
+        
+        # boutons du combat
+        
+        self.fight.pushButton_4.clicked.connect(self.fuir)
+        # self.fight.pushButton_3.clicked.connect(self.sac)s
+        
+        
+    def fuir(self):
+        self.combat = 0
+        self.setupUI()
+        
 
                 
         
@@ -71,8 +89,8 @@ class ImageWindow(QMainWindow):
         """
         if self.combat == 0 :  # si on n'est pas en phase de combat
             
-            
-            # print(f"Touche pressée : {key}")
+            key = event.key()
+            print(f"Touche pressée : {key}")
             if tm.time() - self.start > 0.01 :
                 key = event.key()
                 if key == 16777235 :
@@ -89,13 +107,19 @@ class ImageWindow(QMainWindow):
                     self.start = tm.time()
                 self.img = "../data/map.jpg"
                 
+                if key == 83 :
+                    self.terrain.hide()
+                    self.sac.show()
+                
                 self.terrain.show_map()
                 self.combat = self.terrain.combat
             else :
                 pass
         else :
+            # print(self.combat)
             self.terrain.hide()
-            self.fight.show()
+            print(self.combat)
+            self.fight.show(25, self.combat)
 
 
 class Red:

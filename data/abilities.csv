@@ -37,18 +37,18 @@ Ligotage,normal,phy,15,85,20,0,0,normal,0,False,normal,False,0,False,False
 Bélier,normal,phy,90,85,20,0,1,normal,0,False,normal,False,0,False,True
 Mania,normal,phy,90,100,20,0,0,normal,0,False,normal,False,0,False,False
 Damoclès,normal,phy,100,100,15,0,1,normal,0,False,normal,False,0,False,True
-Mimi-Queue,Normal,status,0,100,30,0,0,normal,0,False,normal,False,0,False,False
+Mimi-Queue,normal,status,0,100,30,0,0,normal,0,False,normal,False,0,False,False
 Dard-Venin,poison,phy,15,100,35,0,0,poisoned,30,False,normal,False,0,False,True
 Double-Dard,bug,phy,50,100,20,0,0,poisoned,36,False,normal,False,0,False,True
 Dard-Nuée,bug,phy,14,85,20,0,0,normal,0,False,normal,True,0,False,True
-Groz'Yeux,Normal,status,0,100,30,0,0,normal,0,False,normal,False,0,False,False
-Morsure,Normal,phy,60,100,25,0,0,normal,0,False,normal,False,0,False,True
-Rugissement,Normal,status,0,100,40,0,0,normal,0,False,normal,False,0,False,False
-Hurlement,Normal,status,0,100,20,0,0,normal,0,False,normal,False,0,False,False
-Berceuse,Normal,status,0,55,15,0,0,asleep,100,False,normal,False,0,False,True
-Ultrason,Normal,status,0,55,20,0,0,confused,100,False,normal,False,0,False,True
-Sonicboom,Normal,phy,0,90,20,0,0,normal,0,False,normal,False,40,False,True
-Entrave,Normal,status,0,55,20,0,0,normal,0,False,normal,False,0,False,False
+Groz'Yeux,normal,status,0,100,30,0,0,normal,0,False,normal,False,0,False,False
+Morsure,normal,phy,60,100,25,0,0,normal,0,False,normal,False,0,False,True
+Rugissement,normal,status,0,100,40,0,0,normal,0,False,normal,False,0,False,False
+Hurlement,normal,status,0,100,20,0,0,normal,0,False,normal,False,0,False,False
+Berceuse,normal,status,0,55,15,0,0,asleep,100,False,normal,False,0,False,True
+Ultrason,normal,status,0,55,20,0,0,confused,100,False,normal,False,0,False,True
+Sonicboom,normal,phy,0,90,20,0,0,normal,0,False,normal,False,40,False,True
+Entrave,normal,status,0,55,20,0,0,normal,0,False,normal,False,0,False,False
 Acide,poison,phy,40,100,30,0,0,normal,0,False,normal,False,0,False,True
 Flammèche,fire,spe,40,100,25,0,0,burnt,10,False,normal,False,0,False,True
 Lance-Flamme,fire,spe,95,100,15,0,0,burnt,10,False,normal,False,0,False,True
@@ -61,14 +61,14 @@ Blizzard,ice,spe,120,90,5,0,0,frozen,10,False,normal,False,0,False,True
 Rafale Psy,psychic,spe,65,100,20,0,0,normal,0,False,normal,False,0,False,True
 Bulles d'O,water,spe,65,100,20,0,0,normal,0,False,normal,False,0,False,True
 Onde Boréale,ice,spe,65,100,20,0,0,normal,0,False,normal,False,0,False,True
-Ultralaser,Normal,phy,150,90,5,0,0,normal,0,False,normal,False,0,False,False
+Ultralaser,normal,phy,150,90,5,0,0,normal,0,False,normal,False,0,False,False
 Picpic,flying,phy,35,100,35,0,0,normal,0,False,normal,False,0,False,True
 Bec Vrille,flying,phy,80,100,20,0,0,normal,0,False,normal,False,0,False,True
 Sacrifice,fighting,phy,80,80,25,0,1,normal,0,False,normal,False,0,False,True
 Balayage,fighting,phy,50,90,20,0,0,normal,0,False,normal,False,0,False,True
 Riposte,fighting,phy,0,100,20,0,0,normal,0,False,normal,False,0,False,False
 Frappe Atlas,fighting,phy,0,100,20,0,0,normal,0,False,normal,False,100,False,True
-Force,Normal,phy,80,100,15,0,0,normal,0,False,normal,False,0,False,True
+Force,normal,phy,80,100,15,0,0,normal,0,False,normal,False,0,False,True
 Vol-Vie,grass,spe,20,100,20,1,0,normal,0,False,normal,False,0,False,True
 Méga-Sangsue,grass,spe,40,100,10,1,0,normal,0,False,normal,False,0,False,True
 Vampigraine,grass,status,0,90,10,0,0,normal,0,True,normal,False,0,False,True

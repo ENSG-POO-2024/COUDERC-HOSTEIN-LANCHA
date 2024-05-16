@@ -38,7 +38,7 @@ def combat(liste_pkmn,wild_pokemon):
                 capture = True
             else :
                 capture = False
-            current_pokemon.checkstate_end(wild_pokemon)
+                current_pokemon.checkstate_end(wild_pokemon)
         elif a[0] == 3:
             #3 indique une tentative de fuite
             #Le calcul de celle-ci dépend de la vitesse du pokémon utilise, de la vitesse du pokemon sauvage, et du nombre de tentatives de fuites déjà effectuées

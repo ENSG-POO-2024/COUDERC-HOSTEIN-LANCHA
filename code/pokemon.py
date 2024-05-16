@@ -25,6 +25,7 @@ def number_to_pokemon(num):
     dfs = all_pokemon.loc[num]["Defense"]
     dfs_spe = all_pokemon.loc[num]["Sp. Def"]
     vit = all_pokemon.loc[num]["Speed"]
+    catchrate = all_pokemon.loc[num]["Catchrate"]
     liste_capacites = [all_pokemon.loc[num]["Move1"],all_pokemon.loc[num]["Move2"],all_pokemon.loc[num]["Move3"],all_pokemon.loc[num]["Move4"]]
     #On a ajouté au jeu de données d'origine 4 colonnes, chacune correspondant à un numéro d'attaque dont le pokémon dispose
     #dans notre jeu, les attaques seront fixées, les pokémon ne pourront pas en apprendre de nouvelles ou en oublier
@@ -44,10 +45,10 @@ def number_to_pokemon(num):
     vit = np.floor(((2 * vit * lvl) / 100) + 5)
     #les formules assez imbuvables ci-dessus proviennent de la page poképédia "calcul des statistiques"
     
-    return Pokemon(name, pv, atk, atk_spe, dfs, dfs_spe, vit, liste_capacites, type1, type2)
+    return Pokemon(name, pv, atk, atk_spe, dfs, dfs_spe, vit, liste_capacites, catchrate, type1, type2)
 
 class Pokemon:
-    def __init__(self,name,pv,atk,atk_spe,dfs,dfs_spe,vit,liste_capacites,type1,type2 = "neutral"):
+    def __init__(self,name,pv,atk,atk_spe,dfs,dfs_spe,vit,liste_capacites,catchrate,type1,type2 = "neutral"):
         #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
         #Chaque statistique est définie comme dans les jeux Pokémon classiques (à partir de la 2e génération)
         #
@@ -61,6 +62,7 @@ class Pokemon:
         self.dfs = dfs
         self.dfs_spe = dfs_spe
         self.vit = vit
+        self.catchrate = catchrate
         self.ko = False
         self.liste_capacites = liste_capacites
         #La liste des capacités des pokémon est une liste de 4 entiers, chacun donnant l'indice d'une attaque dans le dataframe "capacites"
@@ -200,6 +202,7 @@ class Pokemon:
         
         if randint(0,99) < capacites["Precision"][num]:
             #On vérifie que l'attaque se lance, cela dépend de la précision de l'attaque
+            #une précision de 70 par exemple signifie que l'attaque a 70% de chances de réussir
             condition = True
             if capacites["condition"][num] == "asleep":
                 #Cette condition permet de vérifier que si l'attaque est Dévorêve, elle
@@ -258,12 +261,3 @@ class Pokemon:
         self.pv += np.floor(amount)
         if self.pv > self.pv_max:
             self.pv = self.pv_max
-
-
-class PokemonSauvage(Pokemon):
-    #On crée une sous-classe spécifiquement pour les pokémon sauvages
-    #ceux-ci disposent en plus d'un taux de capture
-    def __init__(self,cap):
-        super().__init__()
-        self.cap = cap
-        self.iswild = True

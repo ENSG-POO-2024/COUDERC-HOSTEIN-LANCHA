@@ -1,0 +1,166 @@
+Name,Type,Nature,Power,Precision,PP,LS,SD,newstatus,precision_status,seed,condition,functional
+Écras'Face,normal,phy,40,100,35,0,0,normal,0,0,normal,True
+Poing-Karaté,normal,phy,50,100,25,0,0,normal,0,0,normal,True
+Torgnoles,normal,phy,15,85,10,0,0,normal,0,0,normal,False
+Poing Comète,normal,phy,18,85,15,0,0,normal,0,0,normal,False
+Ultimapoing,normal,phy,80,85,20,0,0,normal,0,0,normal,True
+Jackpot,normal,phy,40,100,20,0,0,normal,0,0,normal,True
+Poing de Feu,fire,spe,75,100,15,0,0,burnt,10,0,normal,True
+Poinglace,ice,spe,75,100,15,0,0,frozen,10,0,normal,True
+Poing-Éclair,electric,spe,75,100,15,0,0,paralyzed,10,0,normal,True
+Griffe,normal,phy,40,100,35,0,0,normal,0,0,normal,True
+Force Poigne,normal,phy,55,100,30,0,0,normal,0,0,normal,True
+Guillotine,normal,phy,90000,30,5,0,0,normal,0,0,normal,True
+Coupe-Vent,normal,phy,80,75,10,0,0,normal,0,0,normal,False
+Danse-Lames,normal,status,0,100,30,0,0,normal,0,0,normal,False
+Coupe,normal,phy,50,95,30,0,0,normal,0,0,normal,True
+Tornade,normal,phy,40,100,35,0,0,normal,0,0,normal,True
+Cru-Aile,flying,phy,35,100,35,0,0,normal,0,0,normal,True
+Cyclone,normal,status,0,85,20,0,0,normal,0,0,normal,False
+Vol,flying,phy,70,95,15,0,0,normal,0,0,normal,False
+Étreinte,normal,phy,15,75,20,0,0,normal,0,0,normal,False
+Souplesse,normal,phy,80,75,20,0,0,normal,0,0,normal,True
+Fouet Lianes,grass,spe,35,100,10,0,0,normal,0,0,normal,True
+Écrasement,normal,phy,65,100,20,0,0,normal,0,0,normal,True
+Double Pied,fighting,phy,60,100,30,0,0,normal,0,0,normal,True
+Ultimawashi,normal,phy,120,75,5,0,0,normal,0,0,normal,True
+Pied Sauté,fighting,phy,70,95,25,0,0,normal,0,0,normal,True
+Mawashi Geri,fighting,phy,60,85,15,0,0,normal,0,0,normal,True
+Jet de Sable,normal,status,0,100,15,0,0,normal,0,0,normal,False
+Coup d'Boule,normal,phy,70,100,15,0,0,normal,0,0,normal,True
+Koud'Korne,normal,phy,65,100,25,0,0,normal,0,0,normal,True
+Furie,normal,phy,15,85,20,0,0,normal,0,0,normal,False
+Empal'Korne,normal,phy,90000,30,5,0,0,normal,0,0,normal,True
+Charge,normal,phy,35,95,35,0,0,normal,0,0,normal,True
+Plaquage,normal,phy,85,100,15,0,0,paralyzed,30,0,normal,True
+Ligotage,normal,phy,15,85,20,0,0,normal,0,0,normal,False
+Bélier,normal,phy,90,85,20,0,1,normal,0,0,normal,True
+Mania,normal,phy,90,100,20,0,0,normal,0,0,normal,False
+Damoclès,normal,phy,100,100,15,0,1,normal,0,0,normal,True
+Mimi-Queue,Normal,status,0,100,30,0,0,normal,0,0,normal,False
+Dard-Venin,poison,phy,15,100,35,0,0,poisoned,30,0,normal,True
+Double-Dard,bug,phy,50,100,20,0,0,poisoned,36,0,normal,True
+Dard-Nuée,bug,phy,14,85,20,0,0,normal,0,0,normal,False
+Groz'Yeux,Normal,status,0,100,30,0,0,normal,0,0,normal,False
+Morsure,Normal,phy,60,100,25,0,0,normal,0,0,normal,True
+Rugissement,Normal,status,0,100,40,0,0,normal,0,0,normal,False
+Hurlement,Normal,status,0,100,20,0,0,normal,0,0,normal,False
+Berceuse,Normal,status,0,55,15,0,0,asleep,100,0,normal,True
+Ultrason,Normal,status,0,55,20,0,0,confused,100,0,normal,True
+Sonicboom,Normal,phy,0,90,20,0,0,normal,0,0,normal,False
+Entrave,Normal,status,0,55,20,0,0,normal,0,0,normal,False
+Acide,poison,phy,40,100,30,0,0,normal,0,0,normal,True
+Flammèche,fire,spe,40,100,25,0,0,burnt,10,0,normal,True
+Lance-Flamme,fire,spe,95,100,15,0,0,burnt,10,0,normal,True
+Brume,ice,status,0,100,30,0,0,normal,0,0,normal,False
+Pistolet à O,water,spe,40,100,25,0,0,normal,0,0,normal,True
+Hydrocanon,water,spe,120,80,5,0,0,normal,0,0,normal,True
+Surf,water,spe,95,100,15,0,0,normal,0,0,normal,True
+Laser Glace,ice,spe,95,100,10,0,0,frozen,10,0,normal,True
+Blizzard,ice,spe,120,90,5,0,0,frozen,10,0,normal,True
+Rafale Psy,psychic,spe,65,100,20,0,0,normal,0,0,normal,True
+Bulles d'O,water,spe,65,100,20,0,0,normal,0,0,normal,True
+Onde Boréale,ice,spe,65,100,20,0,0,normal,0,0,normal,True
+Ultralaser,Normal,phy,150,90,5,0,0,normal,0,0,normal,False
+Picpic,flying,phy,35,100,35,0,0,normal,0,0,normal,True
+Bec Vrille,flying,phy,80,100,20,0,0,normal,0,0,normal,True
+Sacrifice,fighting,phy,80,80,25,0,1,normal,0,0,normal,True
+Balayage,fighting,phy,50,90,20,0,0,normal,0,0,normal,True
+Riposte,fighting,phy,0,100,20,0,0,normal,0,0,normal,False
+Frappe Atlas,fighting,phy,0,100,20,0,0,normal,0,0,normal,False
+Force,Normal,phy,80,100,15,0,0,normal,0,0,normal,True
+Vol-Vie,grass,spe,20,100,20,1,0,normal,0,0,normal,True
+Méga-Sangsue,grass,spe,40,100,10,1,0,normal,0,1,normal,True
+Vampigraine,grass,status,0,90,10,0,0,normal,0,0,normal,True
+Croissance,normal,status,0,100,40,0,0,normal,0,0,normal,False
+Tranch'Herbe,grass,spe,55,95,25,0,0,normal,0,0,normal,True
+Lance-Soleil,grass,spe,120,100,10,0,0,normal,0,0,normal,False
+Poudre Toxik,poison,status,0,75,35,0,0,poisoned,100,0,normal,True
+Para-Spore,grass,status,0,75,30,0,0,paralyzed,100,0,normal,True
+Poudre Dodo,grass,status,0,75,15,0,0,asleep,100,0,normal,True
+Danse-Fleur,grass,spe,70,100,20,0,0,normal,0,0,normal,False
+Sécrétion,bug,status,0,95,40,0,0,normal,0,0,normal,False
+Draco-Rage,Dragon,spe,0,100,10,0,0,normal,0,0,normal,False
+Danseflamme,fire,spe,15,70,15,0,0,normal,0,0,normal,False
+Éclair,electric,spe,40,100,30,0,0,paralyzed,10,0,normal,True
+Tonnerre,electric,spe,95,100,15,0,0,paralyzed,10,0,normal,True
+Cage-Éclair,electric,status,0,100,20,0,0,paralyzed,100,0,normal,True
+Fatal-Foudre,electric,spe,120,70,10,0,0,paralyzed,30,0,normal,True
+Jet-Pierres,rock,phy,50,65,15,0,0,normal,0,0,normal,True
+Séisme,ground,phy,100,100,10,0,0,normal,0,0,normal,True
+Abîme,ground,phy,90000,30,5,0,0,normal,0,0,normal,True
+Tunnel,ground,phy,100,100,10,0,0,normal,0,0,normal,False
+Toxik,poison,status,0,85,10,0,0,poisoned,100,0,normal,True
+Choc Mental,psychic,spe,50,100,25,0,0,normal,0,0,normal,True
+Psyko,psychic,spe,90,100,10,0,0,normal,0,0,normal,True
+Hypnose,psychic,status,0,60,20,0,0,asleep,100,0,normal,True
+Yoga,psychic,status,0,100,40,0,0,normal,0,0,normal,False
+Hâte,psychic,status,0,100,30,0,0,normal,0,0,normal,False
+Vive-Attaque,normal,phy,40,100,30,0,0,normal,0,0,normal,True
+Frénésie,normal,phy,20,100,20,0,0,normal,0,0,normal,False
+Téléport,psychic,status,0,100,20,0,0,normal,0,0,normal,False
+Ténèbres,ghost,phy,0,100,15,0,0,normal,0,0,normal,False
+Copie,normal,status,0,100,10,0,0,normal,0,0,normal,False
+Grincement,normal,status,0,85,40,0,0,normal,0,0,normal,False
+Reflet,normal,status,0,100,15,0,0,normal,0,0,normal,False
+Soin,normal,status,0,100,20,0,0,normal,0,0,normal,False
+Armure,normal,status,0,100,30,0,0,normal,0,0,normal,False
+Lilliput,normal,status,0,100,20,0,0,normal,0,0,normal,False
+Brouillard,normal,status,0,100,20,0,0,normal,0,0,normal,False
+Onde Folie,ghost,status,0,100,10,0,0,confused,100,0,normal,True
+Repli,water,status,0,100,40,0,0,normal,0,0,normal,False
+Boul'Armure,normal,status,0,100,40,0,0,normal,0,0,normal,False
+Bouclier,psychic,status,0,100,30,0,0,normal,0,0,normal,False
+Mur Lumière,psychic,status,0,100,30,0,0,normal,0,0,normal,False
+Buée Noire,ice,status,0,100,30,0,0,normal,0,0,normal,False
+Protection,psychic,status,0,100,20,0,0,normal,0,0,normal,False
+Puissance,normal,status,0,100,30,0,0,normal,0,0,normal,False
+Patience,normal,phy,0,100,10,0,0,normal,0,0,normal,False
+Métronome,normal,status,0,100,10,0,0,normal,0,0,normal,False
+Mimique,flying,status,0,100,20,0,0,normal,0,0,normal,False
+Destruction,normal,phy,130,100,5,0,4,normal,0,0,normal,True
+Bomb'Œuf,normal,phy,100,75,10,0,0,normal,0,0,normal,True
+Léchouille,ghost,phy,20,100,30,0,0,paralyzed,30,0,normal,True
+Purédpois,poison,phy,20,70,20,0,0,poisoned,40,0,normal,True
+Détritus,poison,phy,65,100,20,0,0,poisoned,30,0,normal,True
+Massd'Os,ground,phy,65,85,20,0,0,normal,0,0,normal,True
+Déflagration,fire,spe,120,85,5,0,0,burnt,10,0,normal,True
+Cascade,water,spe,80,100,15,0,0,normal,0,0,normal,True
+Claquoir,water,spe,35,75,10,0,0,normal,0,0,normal,False
+Météores,normal,phy,60,100,20,0,0,normal,0,0,normal,True
+Coud'Krâne,normal,phy,100,100,15,0,0,normal,0,0,normal,True
+Picanon,normal,phy,20,100,15,0,0,normal,0,0,normal,False
+Constriction,normal,phy,10,100,35,0,0,normal,0,0,normal,False
+Amnésie,psychic,status,0,100,20,0,0,normal,0,0,normal,False
+Télékinésie,psychic,status,0,80,15,0,0,normal,0,0,normal,False
+E-Coque,normal,status,0,100,10,0,0,normal,0,0,normal,False
+Pied Voltige,fighting,phy,85,90,20,0,0,normal,0,0,normal,True
+Intimidation,normal,status,0,75,30,0,0,normal,0,0,normal,False
+Dévorève,psychic,spe,100,100,15,1,0,normal,0,0,asleep,True
+Gaz Toxik,poison,status,0,55,40,0,0,poisoned,100,0,normal,True
+Pilonnage,normal,phy,15,85,20,0,0,normal,0,0,normal,False
+Vampirisme,bug,phy,20,100,15,1,0,normal,0,0,normal,True
+Grobisou,normal,status,0,75,10,0,0,asleep,100,0,normal,True
+Pique,flying,phy,140,90,5,0,0,normal,0,0,normal,False
+Morphing,normal,status,0,100,10,0,0,normal,0,0,normal,False
+Écume,water,spe,20,100,30,0,0,normal,0,0,normal,True
+Uppercut,normal,phy,70,100,10,0,0,confused,20,0,normal,True
+Spore,grass,status,0,100,15,0,0,asleep,100,0,normal,True
+Flash,normal,status,0,70,20,0,0,normal,0,0,normal,False
+Vague Psy,psychic,spe,0,80,15,0,0,normal,0,0,normal,True
+Trempette,normal,status,0,100,40,0,0,normal,0,0,normal,True
+Acidarmure,poison,status,0,100,40,0,0,normal,0,0,normal,False
+Pince-Masse,water,spe,90,85,10,0,0,normal,0,0,normal,True
+Explosion,normal,phy,170,100,5,0,4,normal,0,0,normal,True
+Combo-Griffe,normal,phy,18,80,15,0,0,normal,0,0,normal,False
+Osmerang,ground,phy,100,90,10,0,0,normal,0,0,normal,True
+Repos,psychic,status,0,100,10,0,0,normal,0,0,normal,False
+Éboulement,rock,phy,75,90,10,0,0,normal,0,0,normal,True
+Croc de Mort,normal,phy,80,90,15,0,0,normal,0,0,normal,True
+Affûtage,normal,status,0,100,30,0,0,normal,0,0,normal,False
+Adaptation,normal,status,0,100,30,0,0,normal,0,0,normal,False
+Triplattaque,normal,phy,80,100,10,0,0,normal,0,0,normal,True
+Croc Fatal,normal,phy,0,90,10,0,0,normal,0,0,normal,False
+Tranche,normal,phy,70,100,20,0,0,normal,0,0,normal,False
+Clonage,normal,status,0,100,10,0,0,normal,0,0,normal,True
+Lutte,neutral,phy,50,100,10,0,1,normal,0,0,normal,False

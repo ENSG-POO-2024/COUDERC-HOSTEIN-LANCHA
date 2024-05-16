@@ -7,12 +7,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt5.QtGui import QPixmap
 import numpy as np
 import time as tm
+import pandas as pd
 
 
 import os
 
-path = os.path.dirname(os.path.abspath(__file__))
 
+list_pokemon = pd.read_csv(("../data/pokemon_first_gen.csv"), delimiter = ',')
+position_pokemon = pd.read_csv(("../data/pokemon_coordinates.csv"), delimiter =',')
 
 
 
@@ -48,7 +50,7 @@ class Carte():
 
 
 class inter_combat ():
-    def __init__(self, MainWindow):
+    def __init__(self, MainWindow, pok1, pok2):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -216,15 +218,15 @@ class inter_combat ():
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.P1 = QtWidgets.QLabel(self.centralwidget)
-        self.P1.setGeometry(QtCore.QRect(130, 270, 261, 261))
+        self.P1.setGeometry(QtCore.QRect(110, 260, 261, 261))
         self.P1.setText("")
-        self.P1.setPixmap(QtGui.QPixmap("../data/img/combat/poke1.png"))
+        self.P1.setPixmap(QtGui.QPixmap("../data/sprites/dos/"+str(pok1)+".jpg"))
         self.P1.setScaledContents(True)
         self.P1.setObjectName("P1")
         self.P2 = QtWidgets.QLabel(self.centralwidget)
         self.P2.setGeometry(QtCore.QRect(540, 70, 261, 261))
         self.P2.setText("")
-        self.P2.setPixmap(QtGui.QPixmap("../data/img/combat/poke2.png"))
+        self.P2.setPixmap(QtGui.QPixmap("../data/sprites/face/"+str(pok2)+".jpg"))
         self.P2.setScaledContents(True)
         self.P2.setObjectName("P2")
         self.P2_N = QtWidgets.QLabel(self.centralwidget)
@@ -374,14 +376,14 @@ class inter_combat ():
         self.pushButton_3.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
+        self.retranslateUi(MainWindow, pok1, pok2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow, pok1, pok2):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.P1_N.setText(_translate("MainWindow", "POKEMON 1"))
-        self.P2_N.setText(_translate("MainWindow", "POKEMON 2"))
+        self.P1_N.setText(_translate("MainWindow", list_pokemon.Name[pok1]))
+        self.P2_N.setText(_translate("MainWindow", list_pokemon.Name[pok2]))
         self.PV1_2.setFormat(_translate("MainWindow", "%p / %m"))
         self.PV1_3.setFormat(_translate("MainWindow", "%p / %m"))
         self.label_4.setText(_translate("MainWindow", "15/100"))

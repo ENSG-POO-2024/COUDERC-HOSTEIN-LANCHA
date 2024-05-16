@@ -11,6 +11,8 @@ all_pokemon["Type1"] = all_pokemon["Type1"].str.lower()
 all_pokemon["Type2"] = all_pokemon["Type2"].str.lower()
 
 def number_to_pokemon(num):
+    if num == 0:
+        return None
     #permet d'obtenir un pokemon en donnant son numero pokedex
     #renvoie un objet "Pokemon" avec toutes les statistiques dont il dispose au niveau 100
     #pour les nerds : on a fixé ici tous les IVs et EVs du pokémon à 0, choisi une nature neutre pour toutes les statistiques

@@ -14,6 +14,7 @@ def combat(liste_pkmn,wild_pokemon):
         #c'est une liste de deux int
         #le premier donne la nature de l'action, le deuxieme est specifique a chaque action
         a = [0,randint(0,3)]
+        #TEST
         if a[0] == 0:
             #0 indique d'attquer
             #le deuxieme int donne quelle attaque choisir (0 à 3)
@@ -31,10 +32,10 @@ def combat(liste_pkmn,wild_pokemon):
             #2 indique une tentative de capture
             #le deuxième int donne le type de poké ball a utiliser
             #sa valeur (1, 1.5 ou 2) modifie la probabilité de capture
-            a = ((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) * wild_pokemon.catchrate * a[1]) / 255
+            c = ((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) * wild_pokemon.catchrate * a[1]) / 255
             #La probabilité de capturer un pokémon dépend de ses points de vie maximum, de ses points de vie actuels, de son taux de capture
             #et du type de ball utilisé pour tenter de le catpturer
-            if random() < a :
+            if random() < c :
                 capture = True
             else :
                 capture = False

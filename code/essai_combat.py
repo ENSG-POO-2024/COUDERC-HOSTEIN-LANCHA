@@ -75,9 +75,8 @@ class Combat :
                 self.combat_fini = True
             else :
                 #Le pokémon sauvage a toujours le même comportement, il utilise une attaque au hasard
-                if self.a[0] != 1:
-                    wild_pokemon.attaque(wild_pokemon.liste_capacites[randint(0,3)],self.current_pokemon)
-                    print('yo')
-    
+                wild_pokemon.attaque(wild_pokemon.liste_capacites[randint(0,3)],self.current_pokemon)
+                print('yo')
+
     
     

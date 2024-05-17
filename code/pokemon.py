@@ -1,3 +1,8 @@
+'''
+Ce fichier gère la classe Pokemon et sa génération
+'''
+
+
 import types_pkmn
 import numpy as np
 import pandas as pd
@@ -6,20 +11,36 @@ from random import randint,random
 
 
 capacites = pd.read_csv("../data/abilities.csv")
+#On importe la liste de toutes les capacités sous forme de dataframe pandas
 all_pokemon = pd.read_csv("../data/pokemon_first_gen.csv")
+#On importe la liste de tous les pokémon en dataframe pandas
+#celui-ci n'est utilisé que dans la fonction number_to_pokemon, mais celle-ci a vocation a être utilisée plusieurs fois, il est donc préférable
+#de l'importer une fois au début et de réutiliser le même fichier ensuite puisqu'on ne le modifiera pas
 all_pokemon["Type1"] = all_pokemon["Type1"].str.lower()
 all_pokemon["Type2"] = all_pokemon["Type2"].str.lower()
+#On convertit tous les types en bas-de-casse pour permettre une correspondance entre tous les fichiers
 
 def number_to_pokemon(num):
+    '''
+    Donne un objet pokemon correspondant au numéro indiqué dans l'ordre du pokédex
+    utilise le fichier "pokemon_first_gen.csv"
+    :param num: numéro du pokémon dans le pokédex (de 1 à 151)
+    :type num: int
+    
+    :return: pokémon ayant le numéro correspondant avec toutes ses statistiques initialisées comme dans "pokemon_first_gen.csv"
+    :type return: objet Pokemon
+    
+    
+    Pour le détail, on choisit chaque pokémon au niveau 100, et ses valeurs d'IV et d'EV sont toutes fixées à 0
+    Autrement dit c'est le pokémon qu'on obtient si on est le plus malchanceux possible et qu'on ne l'a jamais utilisé en combat auparavant
+    Tous les calculs sont basés sur la 3e génération de jeux pokémon
+    '''
     if num == 0:
         return None
-    #permet d'obtenir un pokemon en donnant son numero pokedex
-    #renvoie un objet "Pokemon" avec toutes les statistiques dont il dispose au niveau 100
-    #pour les nerds : on a fixé ici tous les IVs et EVs du pokémon à 0, choisi une nature neutre pour toutes les statistiques
-    #et on a utilisé la formule de calcul des statistiques de la 3e génération
     lvl = 100
     num -= 1
     #le numéro du pokédex commence à 1, notre dataframe est indexée à partir de 0
+    
     name = all_pokemon.loc[num]["Name"]
     pv = all_pokemon.loc[num]["HP"]
     atk = all_pokemon.loc[num]["Attack"]
@@ -39,6 +60,8 @@ def number_to_pokemon(num):
     else :
         type2 = "neutral"
     
+    #Ci-dessus, toute l'extraction des données depuis le dataframe
+    
     if pd.isnull(liste_capacites[3]):
         liste_capacites[3] = 149
         if pd.isnull(liste_capacites[2]):
@@ -46,21 +69,55 @@ def number_to_pokemon(num):
             if pd.isnull(liste_capacites[1]):
                 liste_capacites[1] = 149
     
+    #On gère le cas où les pokémon ne sont pas initialisés avec 4 attaques en leur donnant l'attaque, sans effet, "trempette à chaque emplacement vide
+    
     pv = np.floor(((2 * pv * lvl) / 100) + lvl + 10)
     atk = np.floor(((2 * atk * lvl) / 100) + 5)
     atk_spe = np.floor(((2 * atk_spe * lvl) / 100) + 5)
     dfs = np.floor(((2 * dfs * lvl) / 100) + 5)
     dfs_spe = np.floor(((2 * dfs_spe * lvl) / 100) + 5)
     vit = np.floor(((2 * vit * lvl) / 100) + 5)
-    #les formules assez imbuvables ci-dessus proviennent de la page poképédia "calcul des statistiques"
+    
+    #les formules assez imbuvables ci-dessus permettent le calcul des statistiques "réelles" du pokémon qui sont en réalité
+    #bien différentes des statistiques de base du pokémon telles que données dans le fichier csv (sinon c'est pas drôle)
     
     return Pokemon(name, pv, atk, atk_spe, dfs, dfs_spe, vit, liste_capacites, catchrate, type1, type2)
 
 class Pokemon:
+    '''
+    La classe pokemon
+    Les objets pokemon sont actifs tout au long de la partie et conservent leurs attributs d'un combat à l'autre
+    si aucune modification extérieure n'est effectuée
+    '''
     def __init__(self,name,pv,atk,atk_spe,dfs,dfs_spe,vit,liste_capacites,catchrate,type1,type2 = "neutral"):
-        #On a défini par défaut le 2nd type comme neutre mais le programme accepte 2 types distincts
-        #Chaque statistique est définie comme dans les jeux Pokémon classiques (à partir de la 2e génération)
-        #
+        '''
+        :param name: nom du pokémon
+        :param pv: nombre de points de vie max du pokémon
+        :param atk: statistique d'attaque du pokémon
+        :param atk_spe: statistique d'attaque du pokémon
+        :param dfs: statistique d'attaque du pokémon
+        :param dfs_spe: statistique d'attaque du pokémon
+        :param vit: statistique d'attaque du pokémon
+        :param liste_capacites: liste des capacités du pokémon sous forme d'indices
+        :param catchrate: taux de capture du pokémon
+        :param type1: premier type du pokémon
+        :param type2: deuxième type du pokémon, initialisé à "neutral" si aucune valeur n'est fournie (en pratique on la fournit toujours)
+        
+        :type name: str
+        :type pv: int
+        :type atk: int
+        :type atk_spe: int
+        :type dfs: int
+        :type dfs_spe: int
+        :type vit: int
+        :type liste_capacites: list
+        :type catchrate: int
+        :type type1: str
+        :type type2: str
+        
+        
+        
+        '''
         self.name = name
         self.type1 = type1
         self.type2 = type2
@@ -72,35 +129,60 @@ class Pokemon:
         self.dfs_spe = dfs_spe
         self.vit = vit
         self.catchrate = catchrate
-        self.ko = False
         self.liste_capacites = liste_capacites
         #La liste des capacités des pokémon est une liste de 4 entiers, chacun donnant l'indice d'une attaque dans le dataframe "capacites"
         #lui-même obtenu à partir du fichier "abilities.csv"
-        self.iswild = False
+        
+        
         self.lvl = 100
         #On n'utilise pas réellement la mécanique de niveau, mais elle est nécessaire au le calcul de dégâts
+        
+        
+        self.ko = False
+        
+        
         self.state = "normal"
         self.status_duration = 0
         self.seeded = False
+        #les attributs ci-dessus servent pendant le déroulement du combat, ils déterminent si le pokémon est affecté
+        #par un statut négatif (endormi,paralysé...) 
+        #ou bien s'il est infecté (seeded)
+        
         
     def __str__(self):
+        '''
+        rien de bien folichon par ici
+        '''
         return self.name
     
     def checkstate_begin(self):
-        #Cette fonction gère le statut du pokémon au début du tour
-        #Elle renvoie True si le pokémon peut jouer, False sinon
+        '''
+        Cette méthode gère les statuts actifs en début de tour
+        elle renvoie True si le pokémon peut agir et False s'il ne peut pas (s'il est endormi par exemple)
+        on profite du fait que le pokémon soit un objet pour éventuellement modifier sont statut de début de tour
+        
+        :return: True si le pokémon peut jouer, False s'il ne peut pas
+        :type return: bool
+        '''
         if self.state == "asleep":
-            #dans le cas où le pokémon est endormi, l'endormissement dure au plus 4 tours, au minimum 1
+            #Cas où le pokémon est endormi
+            #L'endormissement dure au minimum 1 tour, au maximum 4
+            #À partir du 2e tour d'endormissement, le pokémon a une chance sur deux de se réveiller
+            #Quand le pokémon dort, il ne joue pas
+            #La durée d'endormissement est gérée par l'attribut status_duration
+            
             if self.status_duration == 0:
-                #Si les 4 tours sont écoulés, le pokémon joue
+                #Au bout de 4 tours, le pokémon se réveille
                 self.state = "normal"
                 print("réveil")
                 return True
+            
             elif self.status_duration == 4:
-                #Si le pokémon vient de s'endormir, il ne joue pas
+                #Au premier tour, le pokémon ne joue pas
                 self.status_duration -= 1
                 print("endormi")
                 return False
+            
             else :
                 #Si le pokémon s'est endormi il y a plus d'un tour et moins de 4, on vérifie s'il
                 #se réveille, cela a une chance sur deux d'arriver
@@ -108,118 +190,177 @@ class Pokemon:
                     self.status_duration -= 1
                     print("endormi")
                     return False
-                    #S'il ne se réveille pas, on fait avancer de 1 le compteur de réveil
+                
                 else :
                     self.state = "normal"
                     self.status_duration = 0
                     print("réveil")
                     return True
-                    #S'il se réveille, on met le compteur à 0, et on remet le statut du pokémon à "normal"
+        
+        
         elif self.state == "paralyzed":
-            #Dans le cas de la paralysie, le pokémon a une chance sur 4 de ne pas jouer
-            #Il ne peut pas se défaire de cet effet néanmoins
+            #Cas où le pokémon est paralysé
+            #Dans ce cas, le pokémon a une chance sur 4 de ne pas pouvoir attaquer (hors tous calculs)
+            #Cet état est permanent s'il n'est pas soigné manuellement
+            
             if random() < 0.25 :
                 print("totalement paralysé !")
                 return False
+            
             else :
                 return True
+            
+            
         elif self.state == "frozen":
-            #Si le pokémon est gelé, il a une chance sur 5 de dégeler, et c'est le seul cas
-            #où il pourra jouer
+            #Cas où le pokémon est gelé
+            #Quand il est gelé, le pokémon ne peut pas combattre
+            #Il a une chance sur 5 de dégeler, et s'il dégèle, il peut combattre le tour même
+            
             if random() < 0.2:
                 self.state = "normal"
                 print("dégelé !")
                 return True
+            
             else :
                 print("totalement gelé !")
                 return False
+        
+        
         elif self.state == "confused":
-            #Si le pokémon est confus, la confusion dure 1 à 4 tours
-            #À chaque tour, le pokémon a 1 chance sur 2 de repasser à l'état normal
-            #S'il reste confus, il a une chance sur deux de s'infliger des dégâts et de ne pas pouvoir
-            #jouer, et une chance sur deux de jouer normalement
+            #Cas où le pokémon est confus
+            #C'est la modification de statut la plus complexe
+            #La durée de la confusion est gérée comme celle du sommeil
+            #De la même façon, il a une chance sur deux de cesser d'être confus au 2e et 3e tour de confusion
+            #Lorsqu'il est confus, le pokémon a une chance sur deux d'échouer son attaque (hors tous calculs)
+            #De plus, s'il échoue à cause de la confusion, il subit des dégâts à hauteur d'un huitième de ses pv max
+            
             if self.status_duration == 0:
-                #Quand le compteur est à 0, le pokémon repasse à l'état normal
+                #Au bout de 4 tours, le pokémon repasse à l'état normal
                 self.state = "normal"
                 return True
+            
             elif self.status_duration == 4:
-                #Quand le compteur est à 4, le pokémon reste confus, on vérifie s'il joue
+                #Au premier tour, le pokémon ne peut pas revenir à l'état normal
                 if random() < 0.5:
                     self.degats(self.pv_max / 8)
                     return False
+                
                 else :
                     return True
+                
                 self.status_duration -= 1
+                
             else :
-                #Sinon, on vérifie si le pokémon quitte sa confusion
+                #au 2e et 3e tour, le pokémon a une chance sur deux de quitter l'état de confusion
                 if random() < 0.5:
-                    #S'il reste confus, on vérifie s'il joue
+                    #Cas où le pokémon reste confus
                     self.status_duration -= 1
+                    
                     if random() < 0.5:
                         self.degats(self.pv_max / 8)
                         return False
+                    
                     else :
                         return True
+                    
                 else :
-                    #Sinon, il joue normalement
+                    #Cas où il perd l'état
                     self.state = "normal"
                     self.status_duration = 0
                     return True
+        
+        
         else:
             #Si le pokémon n'est sous l'effet d'aucun état actif en début de tour, il joue normalement
             return True
     
     def checkstate_end(self,adv):
-        #Cette fonction gère le statut du pokémon à la fin du tour
+        '''
+        Cette méthode gère les statuts actifs en fin de tour
+        Contrairement aux statuts de fin de tour, ils ne peuvent pas empêcher le pokémon d'attaquer
+        mais ils peuvent lui faire perdre de la vie par exemple
+        Cette méthode ne renvoie rien
+        
+        :param adv: pokémon adverse
+        :type adv: objet Pokemon
+        '''
+        
         if self.seeded == True :
-            #Si le pokémon a subi l'attaque vampigraine, le pokémon adverse vole 1/8 de sa vie
+            #Cas où le pokémon est infecté (effet de la capacité vampigraine)
+            #C'est un effet de statut indépendant des autres, le pokémon peut être infecté et endormi par exemple
             lifesteal = self.degats(np.ceil(self.pv_max / 8))
             adv.heal(lifesteal)
+            
         if self.state == "poisoned" and not self.ko :
-            #Si le pokémon est empoisonné, il perd un quart de sa vie maximale
-            self.pv -= np.ceil(self.pv_max / 8)
-            if self.pv <= 0:
-                self.pv = 0
-                self.ko = True
+            #Cas où le pokémon est empoisonné
+            #Un pokémon empoisonné perd un huitième des ses pv max à chaque fin de tour
+            self.degats(self.pv_max / 8)
+            
         elif self.state == "burnt" and not self.ko :
-            #Si le pokémon est brûlé, il perd un quart de sa vie maximale aussi
-            self.pv -= np.ceil(self.pv_max / 8)
-            if self.pv <= 0:
-                self.pv = 0
-                self.ko = True
+            #Cas où le pokémon est brûlé
+            #L'effet est exactement le même que l'empoisonnement
+            self.degats(self.pv_max / 8)
             
     
     def attaque(self,num,adv):
-        #La méthode qui permet à un pokémon d'en attaquer un autre
-        	#num correspond à l'indice de l'attaque dans le dataframe "capacites"
-        #Le calcul est assez laborieux, la formule est basée sur la page poképédia "calcul des dégâts", on utilise la mécanique de la 1ère génération
+        '''
+        Cette méthode permet au pokémon d'attaquer
+        Elle est assez complexe car elle prend en compte tous les cas d'attaques qu'on a implantés
+        Cette méthode ne renvoie rien
+        
+        :param num: indice de l'attaque utilisée dans le fichier abilities.csv
+        :param adv: pokémon cible
+        :type num: int
+        :type adv: objet Pokemon
+        '''
         
         print(self.name + " utilise " + capacites["Name"][num])
-        type_atk = capacites["Type"][num]
+        
+        
+        #Ci-dessous le calcul de base des dégâts, comme effectué dans les jeux de la 1ere génération
+        
         dmg = ((2 * self.lvl) / 5 + 2) * capacites["Power"][num]
+        
         if capacites["Nature"][num] == "phy":
+            #Les capacités physiques sont affectés par la statistiques attack du pokémon
             dmg *= self.atk
             dmg /= adv.dfs
+            
         elif capacites["Nature"][num] == "spe":
+            #Les capacités physiques sont affectés par la statistiques special_attack du pokémon
             dmg *= self.atk_spe
             dmg /= adv.dfs_spe
+        
         dmg = (dmg / 50) + 2
+
         rnd = randint(217,255)
         rnd /= 255
         dmg *= rnd
+        #Les dégâts ont une petite composante aléatoire
+        
+        
+        
+        type_atk = capacites["Type"][num]
         if self.type1 == type_atk or self.type2 == type_atk:
-            #On a introduit le concept des attaques "STAB" : si le pokémon et son attaque sont de même type, celle-ci augmente de puissance
+            #Les capacités du même type que le pokémon qui les utilise on un bonus multiplicatif de dégâts de 1.5
             if not type_atk == "neutral":
                 #l'attaque neutre (Lutte) doit rester de même puissance indépendamment du type néanmoins
                 dmg *= 1.5
-        #les dégâts augmentent avec la statistique d'attaque du pokémon
+        
+        
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
         dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
-        #Les dégâts changent en fonction du type du pokémon adverse
+        #On calcule les effets des types (résistances et faiblesses) sur chacune des attaques
+        
+        
         if capacites["repeat"][num] :
-            #Certaines capacités peuvent être lancées aléatoirement 2 à 5 fois
-            #Dans ce cas, on multiplie simplement les dégâts infligés par un nombre
-            #entre 2 et 5
+            #Certaines capacités peuvent être lancées aléatoirement 2 à 5 
+            #On a 3 chances sur 8 que l'attaque se lance 2 fois
+            #3 chances cur 8 que l'attaque se lance 3 fois
+            #1 chances cur 8 que l'attaque se lance 4 fois
+            #1 chances cur 8 que l'attaque se lance 5 fois
+            #Dans ce cas, on multiplie simplement les dégâts infligés par un nombre entre 2 et 5
+            
             r = random()
             if r < 0.375:
                 dmg *= 2
@@ -229,66 +370,98 @@ class Pokemon:
                 dmg *= 4
             else :
                 dmg *= 5
+                
+                
         if randint(0,99) < capacites["Precision"][num]:
-            #On vérifie que l'attaque se lance, cela dépend de la précision de l'attaque
-            #une précision de 70 par exemple signifie que l'attaque a 70% de chances de réussir
+            #Chaque attaque dispose d'une précision qui donne le pourcentage de chances de réussite de la capacité
+            
             condition = True
+            #Ce booléen sert uniquement pour le cas des capacités avec une condition d'utilisation
+            
+            
             if capacites["condition"][num] == "asleep":
-                #Cette condition permet de vérifier que si l'attaque est Dévorêve, elle
-                #se lance uniquement si le pokémon adverse est endormi
+                #Une capacité a pour condition que le pokémon adverse soit endormi, si c'est celle-ci, on
+                #vérifie qu'elle peut se lancer
                 if not adv.state == "asleep":
                     condition = False
+                    
             if condition and capacites["Power"][num] != 0:
                 #si l'attaque a une puissance, elle inflige des dégâts
+                #Cela permet d'éviter toute erreur dans le cas où l'attaque a une puissance de 0 mais que
+                #le calcul de dégâts donne un nombre plus grand
                 dmg = adv.degats(dmg)
-                #On change la valeur de dmg en la remplaçant par les dégâts réellement subis
-                #c'est utile dans le calcul du vol de vie
+                
+                #on garde la valeur des dégâts réellements subis dans la variable dmg, cela sert dans certains cas
+                #utiliser la méthode de cette façon permet à la fois d'appliquer réellement la méthode et de sauvegarder la valeur
+                
             if capacites["seed"][num]:
-                #Si l'attaque est vampigraine, elle place le pokémon adverse dans l'état infecté
+                #Dans le cas de l'attaque vampigraine, on place le pokémon adverse dans l'état infecté
                 adv.seeded = True
+                
             if capacites["SD"][num] != 0:
                 #Certaines attaques infligent des dégâts au lanceur
                 #Les dégâts en question dépendent des pv max du lanceur, ils sont soient égaux
                 #à un quart, soit à la totalité de ceux-ci, et "capacites["SD"][num]" vaut 0,1 ou 4
                 self.degats(capacites["SD"][num] * self.pv_max / 4)
+                
             if capacites["LS"][num]:
                 #Certaines attaques soignent le lanceur de la moitié des dégâts infligés
                 self.heal(np.ceil(dmg / 2))
+                
             if capacites["newstatus"][num] != "normal" and adv.state == "normal" and randint(0,99) < capacites["precision_status"][num]:
-                #certaines attaques changent le statut du pokemon adverse
+                #Certaines attaques changent le statut du pokemon adverse
                 #la probabilité de changer de statut est liée à une autre variable située dans
                 #la colonne "precision_status"
                 adv.state = capacites["newstatus"][num]
                 #si le changement de statut réussit, il est appliqué au pokemon adverse
+                
                 if capacites["newstatus"][num] == "asleep":
                     #dans le cas d'une attaque endormant l'adversaire, il faut aussi mettre son compteur
                     #de statut à 4, puisque l'endormissement dure 4 tours au maximum
                     adv.status_duration = 4
+                    
                 if capacites["newstatus"][num] == "confused":
                     #idem pour la confusion
                     adv.status_duration = 4
+                    
             if capacites["heal"][num]:
                 self.heal(self.pv_max / 2)
         else:
             print(self.name + " rate son attaque !")
-            #TEST
         
     def degats(self,dmg):
-        #Une méthode, distincte de "attaque" pour gérer les dégâts
-        #la différencier de la méthode attaque est utile notamment dans le cas où le
-        #pokémon subit des dégâts liés à un autre effet
-        #elle renvoie les dégâts subis, ce qui peut servir pour les attaques ayant du vol de vie par exemple
+        '''
+        Cette méthode sert à gérer les dégâts subis par un pokémon
+        elle renvoie les dégâts réellement subis, c'est à dire après passage à la partie entière ou réduction
+        dans le cas où elle ferait plus de dégâts que le pokémon n'a encore de pv
+        
+        :param dmg: dégâts théoriques subis
+        :type dmg: float
+        
+        :return: dégâts réellement subis
+        :type return: int
+        '''
+        
         if dmg >= self.pv:
             dmg = self.pv
             self.pv = 0
             self.ko = True
             #Si l'attaque rend le pokemon KO, on met ses PV à 0 (pas de PV négatifs)
+            
         else :
             dmg = np.floor(dmg)
             self.pv = self.pv - dmg
         return dmg
     
     def heal(self,amount):
+        '''
+        Cette méthode sert à gérer les soins subis par un pokémon
+        elle ne renvoie rien
+        
+        :param amount: soins théoriques subis
+        :type amount: float
+        '''
         self.pv += np.floor(amount)
         if self.pv > self.pv_max:
             self.pv = self.pv_max
+            #On vérifie que le pokémon ne se soigne pas plus que ses PV maximum

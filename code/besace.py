@@ -102,7 +102,6 @@ if __name__ == "__main__":
         app.exec_()
         
     run_app()
-    print(sac_pokemon)
 
 
 

@@ -121,8 +121,8 @@ class Pokemon:
         self.name = name
         self.type1 = type1
         self.type2 = type2
-        self.pv = pv
-        self.pv_max = pv
+        self.pv = int(pv)
+        self.pv_max = int(pv)
         self.atk = atk
         self.atk_spe = atk_spe
         self.dfs = dfs
@@ -174,13 +174,13 @@ class Pokemon:
             if self.status_duration == 0:
                 #Au bout de 4 tours, le pokémon se réveille
                 self.state = "normal"
-                print("réveil")
+                print(self.name + "se réveille !")
                 return True
             
             elif self.status_duration == 4:
                 #Au premier tour, le pokémon ne joue pas
                 self.status_duration -= 1
-                print("endormi")
+                print(self.name +" est endormi")
                 return False
             
             else :
@@ -188,13 +188,13 @@ class Pokemon:
                 #se réveille, cela a une chance sur deux d'arriver
                 if random() < 0.5:
                     self.status_duration -= 1
-                    print("endormi")
+                    print(self.name +" est endormi")
                     return False
                 
                 else :
                     self.state = "normal"
                     self.status_duration = 0
-                    print("réveil")
+                    print(self.name + " se réveille !")
                     return True
         
         
@@ -204,7 +204,7 @@ class Pokemon:
             #Cet état est permanent s'il n'est pas soigné manuellement
             
             if random() < 0.25 :
-                print("totalement paralysé !")
+                print(self.name + " est totalement paralysé !")
                 return False
             
             else :
@@ -218,11 +218,11 @@ class Pokemon:
             
             if random() < 0.2:
                 self.state = "normal"
-                print("dégelé !")
+                print(self.name + " est dégelé !")
                 return True
             
             else :
-                print("totalement gelé !")
+                print(self.name +" est totalement gelé")
                 return False
         
         
@@ -289,17 +289,20 @@ class Pokemon:
             #Cas où le pokémon est infecté (effet de la capacité vampigraine)
             #C'est un effet de statut indépendant des autres, le pokémon peut être infecté et endormi par exemple
             lifesteal = self.degats(np.ceil(self.pv_max / 8))
+            print(self.name +" est infecté")
             adv.heal(lifesteal)
             
         if self.state == "poisoned" and not self.ko :
             #Cas où le pokémon est empoisonné
             #Un pokémon empoisonné perd un huitième des ses pv max à chaque fin de tour
             self.degats(self.pv_max / 8)
+            print(self.name +" est empoisonné")
             
         elif self.state == "burnt" and not self.ko :
             #Cas où le pokémon est brûlé
             #L'effet est exactement le même que l'empoisonnement
             self.degats(self.pv_max / 8)
+            print(self.name +" est brûlé")
             
     
     def attaque(self,num,adv):
@@ -347,9 +350,21 @@ class Pokemon:
                 #l'attaque neutre (Lutte) doit rester de même puissance indépendamment du type néanmoins
                 dmg *= 1.5
         
+        coef1 = types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
+        coef2 = types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
+        dmg *= coef1
+        dmg *= coef2
         
-        dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type1]]
-        dmg *= types_pkmn.efficiencies[types_pkmn.dic[type_atk],types_pkmn.dic[adv.type2]]
+        if coef1*coef2 == 0 :
+            print("Aucun effet !")
+        elif coef1*coef2 == 0.25:
+            print("Très peu efficace !")
+        elif coef1*coef2 == 0.5:
+            print("Peu efficace !")
+        elif coef1*coef2 == 2:
+            print("Très efficace !")
+        elif coef1*coef2 == 4:
+            print("Extrêmement efficace !")
         #On calcule les effets des types (résistances et faiblesses) sur chacune des attaques
         
         
@@ -397,16 +412,19 @@ class Pokemon:
             if capacites["seed"][num]:
                 #Dans le cas de l'attaque vampigraine, on place le pokémon adverse dans l'état infecté
                 adv.seeded = True
+                print(adv.name + " est infecté !")
                 
             if capacites["SD"][num] != 0:
                 #Certaines attaques infligent des dégâts au lanceur
                 #Les dégâts en question dépendent des pv max du lanceur, ils sont soient égaux
                 #à un quart, soit à la totalité de ceux-ci, et "capacites["SD"][num]" vaut 0,1 ou 4
                 self.degats(capacites["SD"][num] * self.pv_max / 4)
+                print(self.name + " se blesse en attaquant !")
                 
             if capacites["LS"][num]:
                 #Certaines attaques soignent le lanceur de la moitié des dégâts infligés
                 self.heal(np.ceil(dmg / 2))
+                print(self.name + " vole de la vie !")
                 
             if capacites["newstatus"][num] != "normal" and adv.state == "normal" and randint(0,99) < capacites["precision_status"][num]:
                 #Certaines attaques changent le statut du pokemon adverse
@@ -415,17 +433,27 @@ class Pokemon:
                 adv.state = capacites["newstatus"][num]
                 #si le changement de statut réussit, il est appliqué au pokemon adverse
                 
+                if capacites["newstatus"][num] == "burnt":
+                    print(adv.name + " est brûlé !")
+                if capacites["newstatus"][num] == "poisoned":
+                    print(adv.name + " est empoisonné !")
+                if capacites["newstatus"][num] == "frozen":
+                    print(adv.name + " est gelé !")
+                    
                 if capacites["newstatus"][num] == "asleep":
                     #dans le cas d'une attaque endormant l'adversaire, il faut aussi mettre son compteur
                     #de statut à 4, puisque l'endormissement dure 4 tours au maximum
                     adv.status_duration = 4
+                    print(adv.name + " s'endort !")
                     
                 if capacites["newstatus"][num] == "confused":
                     #idem pour la confusion
                     adv.status_duration = 4
+                    print(adv.name + " devient confus !")
                     
             if capacites["heal"][num]:
                 self.heal(self.pv_max / 2)
+                print(self.name + " se soigne !")
         else:
             print(self.name + " rate son attaque !")
         

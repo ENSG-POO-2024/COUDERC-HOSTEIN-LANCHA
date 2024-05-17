@@ -19,7 +19,6 @@ import code_terrain as ct
 
 # les deux lignes sont écrites à cause d'un pb de chemin relatif
 path = os.path.dirname(os.path.abspath(__file__))
-print (path)
 
 # ouverture du fichier contenant la liste des pokemon avec leur nom
 
@@ -149,7 +148,6 @@ class ImageWindow(QMainWindow):
         if self.combat == 0 and self.menu == 0 :  # si on n'est pas en phase de combat
             
             key = event.key()
-            print(f"Touche pressée : {key}")
             if tm.time() - self.start > 0.01 :
                 key = event.key()
                 if key == 16777235 :
@@ -251,7 +249,6 @@ class ImageWindow(QMainWindow):
             self.combat = 0 
             self.sac_pokemon.capture_pokemon(self.wild_pokemon)
             # self.sac.hide()
-            print(self.sac_pokemon)
             self.fight.hide()
             self.menu = 0
             self.terrain.show_map()
@@ -276,7 +273,6 @@ class ImageWindow(QMainWindow):
             # print(self.sac_pokemon.objets[0].pv)
             
             self.deja_comb = self.type_attaque[1]
-            print(self.deja_comb)
             self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon, self.deja_comb)
 
 

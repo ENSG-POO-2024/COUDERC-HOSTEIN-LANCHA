@@ -31,8 +31,8 @@ class Carte():
         self.carte.setScaledContents(True)
         self.carte.setGeometry(QtCore.QRect(50, 50, 800, 720))
 
-        
-    
+
+
     def show_map(self):
                 
         pixmap = QPixmap(self.map.map_init)
@@ -217,7 +217,7 @@ class inter_combat ():
         self.P1_N.setScaledContents(False)
         self.P1_N.setAlignment(QtCore.Qt.AlignCenter)
         self.P1_N.setObjectName("P1_N")
-           
+        
         
         
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -512,7 +512,6 @@ class inter_combat ():
         # print(list_pokemon.Name[pok2])
         self.P1.setPixmap(QtGui.QPixmap("../data/sprites/dos/"+ self.indx1 +".jpg"))
         self.P2.setPixmap(QtGui.QPixmap("../data/sprites/face/"+self.indx2 +".jpg"))
-        print(at)
         if at != -1 :
             self.txt_cadre.setText(_translate("MainWindow", pok1.name + " Utilise " + capacites.Name[pok1.liste_capacites[at]]))
         else:

@@ -27,7 +27,6 @@ class Combat :
             #le premier donne la nature de l'action, le deuxieme est specifique a chaque action
             #TEST
             self.current_pokemon = self.liste_pkmn.objets[0]
-            print(self.a)
                 
             if self.a[0] == 0:
                 #0 indique d'attaquer
@@ -50,13 +49,12 @@ class Combat :
                 c = (((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) / (3 * wild_pokemon.pv_max)) * wild_pokemon.catchrate * self.a[1]) / 255
                 #La probabilité de capturer un pokémon dépend de ses points de vie maximum, de ses points de vie actuels, de son taux de capture
                 #et du type de ball utilisé pour tenter de le capturer
-                print(c)
                 if random() < c :
                     self.capture = True
+                    print("Capture réussie !")
                 else :
                     self.capture = False
                     self.current_pokemon.checkstate_end(wild_pokemon)
-                print(self.capture)
             elif self.a[0] == 3:
                 #3 indique une tentative de fuite
                 #Le calcul de celle-ci dépend de la vitesse du pokémon utilise, de la vitesse du pokemon sauvage, et du nombre de tentatives de fuites déjà effectuées
@@ -68,18 +66,18 @@ class Combat :
                     self.current_pokemon.checkstate_end(wild_pokemon)
                     #plus on essaie, plus on a de chances de fuir
             if self.current_pokemon.ko :
-                print("koooooo")
                 #si le pokemon actuel est ko, on change de pokemon, ou on tente une fuite
+                print(self.current_pokemon.name + " est KO !")
                 self.combat_fini = True
             if wild_pokemon.ko or self.fuite or self.capture :
                 #on verifie si le combat est fini
+                print(wild_pokemon.name + " est KO !")
                 self.combat_fini = True
             else :
                 #Le pokémon sauvage a toujours le même comportement, il utilise une attaque au hasard
                 if wild_pokemon.checkstate_begin():
                     wild_pokemon.attaque(wild_pokemon.liste_capacites[randint(0,3)],self.current_pokemon)
                 wild_pokemon.checkstate_end(self.current_pokemon)
-                print('yo')
 
     
     

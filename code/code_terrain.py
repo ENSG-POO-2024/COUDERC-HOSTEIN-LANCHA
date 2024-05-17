@@ -7,7 +7,6 @@ import pandas as pd
 
 # les deux lignes sont écrites à cause d'un pb de chemin relatif
 path = os.path.dirname(os.path.abspath(__file__))
-print (path)
 
 # ouverture du fichier contenant la liste des pokemon avec leur nom
 

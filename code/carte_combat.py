@@ -15,6 +15,7 @@ import os
 
 list_pokemon = pd.read_csv(("../data/pokemon_first_gen.csv"), delimiter = ',')
 position_pokemon = pd.read_csv(("../data/pokemon_coordinates.csv"), delimiter =',')
+capacites = pd.read_csv("../data/abilities.csv")
 
 
 
@@ -444,10 +445,10 @@ class inter_combat ():
         self.pushButton_2.setText(_translate("MainWindow", "CAPTURE"))
         self.pushButton_3.setText(_translate("MainWindow", "POKEMON"))
         self.pushButton_4.setText(_translate("MainWindow", "RUN"))
-        self.att1.setText(_translate("MainWindow", "ATT1"))
-        self.att2.setText(_translate("MainWindow", "ATT2"))
-        self.att3.setText(_translate("MainWindow", "ATT3"))
-        self.att4.setText(_translate("MainWindow", "ATT4"))
+        self.att1.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[0]]))
+        self.att2.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[1]]))
+        self.att3.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[2]]))
+        self.att4.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[3]]))
 
     def hide(self):
         
@@ -523,9 +524,15 @@ class inter_combat ():
         self.att4.hide()
     
     def att_show(self, pok1,pok2):
+        _translate = QtCore.QCoreApplication.translate
         
         self.indx1 = str((list(list_pokemon.Name).index(pok1.name))+1)
         self.indx2 = str((list(list_pokemon.Name).index(pok2.name))+1)
+        
+        self.att1.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[0]]))
+        self.att2.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[1]]))
+        self.att3.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[2]]))
+        self.att4.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[3]]))
         
         
         _translate = QtCore.QCoreApplication.translate

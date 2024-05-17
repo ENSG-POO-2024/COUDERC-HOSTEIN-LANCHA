@@ -1,10 +1,4 @@
-Couderc-Lacour Philémon
-
-&nbsp;
-Hostein Augustin-Pierre
-
-&nbsp;
-Lancha Mélanie 
+Couderc-Lacour Philémon, Hostein Augustin-Pierre, Lancha Mélanie 
 
 
 ## README

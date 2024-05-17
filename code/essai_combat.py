@@ -17,8 +17,8 @@ class Combat :
         self.tentatives_fuite = 0
         self.capture = False
         self.a = [0,randint(0,3)]
-        
-        
+
+
     def attaque_pokemon (self, wild_pokemon):
         if not self.combat_fini :
                 
@@ -49,7 +49,7 @@ class Combat :
                 #sa valeur (1, 1.5 ou 2) modifie la probabilité de capture
                 c = (((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) / (3 * wild_pokemon.pv_max)) * wild_pokemon.catchrate * self.a[1]) / 255
                 #La probabilité de capturer un pokémon dépend de ses points de vie maximum, de ses points de vie actuels, de son taux de capture
-                #et du type de ball utilisé pour tenter de le catpturer
+                #et du type de ball utilisé pour tenter de le capturer
                 print(c)
                 if random() < c :
                     self.capture = True

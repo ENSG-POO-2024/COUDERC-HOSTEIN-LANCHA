@@ -2,7 +2,6 @@
 """
 Created on Tue May  7 15:47:06 2024
 
-@author: melanie
 """
 
 # -*- coding: utf-8 -*-

@@ -94,27 +94,32 @@ class Pokemon:
             if self.status_duration == 0:
                 #Si les 4 tours sont écoulés, le pokémon joue
                 self.state = "normal"
+                print("réveil")
                 return True
             elif self.status_duration == 4:
                 #Si le pokémon vient de s'endormir, il ne joue pas
                 self.status_duration -= 1
+                print("endormi")
                 return False
             else :
                 #Si le pokémon s'est endormi il y a plus d'un tour et moins de 4, on vérifie s'il
                 #se réveille, cela a une chance sur deux d'arriver
                 if random() < 0.5:
                     self.status_duration -= 1
+                    print("endormi")
                     return False
                     #S'il ne se réveille pas, on fait avancer de 1 le compteur de réveil
                 else :
                     self.state = "normal"
                     self.status_duration = 0
+                    print("réveil")
                     return True
                     #S'il se réveille, on met le compteur à 0, et on remet le statut du pokémon à "normal"
         elif self.state == "paralyzed":
             #Dans le cas de la paralysie, le pokémon a une chance sur 4 de ne pas jouer
             #Il ne peut pas se défaire de cet effet néanmoins
             if random() < 0.25 :
+                print("totalement paralysé !")
                 return False
             else :
                 return True
@@ -123,8 +128,10 @@ class Pokemon:
             #où il pourra jouer
             if random() < 0.2:
                 self.state = "normal"
+                print("dégelé !")
                 return True
             else :
+                print("totalement gelé !")
                 return False
         elif self.state == "confused":
             #Si le pokémon est confus, la confusion dure 1 à 4 tours

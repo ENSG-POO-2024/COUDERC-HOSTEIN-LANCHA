@@ -281,7 +281,7 @@ class inter_combat ():
 "\n"
 "")
         self.PV1_2.setProperty("value", int(pok1.pv))
-        self.PV1_2.setMaximum(pok1.pv_max)
+        self.PV1_2.setMaximum(int(pok1.pv_max))
         self.PV1_2.setTextVisible(False)
         self.PV1_2.setOrientation(QtCore.Qt.Horizontal)
         self.PV1_2.setTextDirection(QtWidgets.QProgressBar.TopToBottom)
@@ -308,7 +308,7 @@ class inter_combat ():
 "")
         
         self.PV1_3.setProperty("value", int(pok2.pv))
-        self.PV1_3.setMaximum(pok2.pv_max)
+        self.PV1_3.setMaximum(int(pok2.pv_max))
         self.PV1_3.setTextVisible(False)
         self.PV1_3.setOrientation(QtCore.Qt.Horizontal)
         self.PV1_3.setTextDirection(QtWidgets.QProgressBar.TopToBottom)

@@ -50,7 +50,8 @@ class ImageWindow(QMainWindow):
         self.combat = 0     #Initialisation du combat
         self.menu = 0
         self.type_attaque = [0,0]
-        
+        self.setFocusPolicy(Qt.StrongFocus)
+        self.deja_comb = -1
         
     def setupUI(self):
         """
@@ -85,7 +86,7 @@ class ImageWindow(QMainWindow):
         
         
         # boutons du combat
-        self.setFocusPolicy(Qt.StrongFocus)
+        # self.setFocusPolicy(Qt.StrongFocus)
         self.button_action()
         
         
@@ -102,7 +103,8 @@ class ImageWindow(QMainWindow):
         if self.combat == 0:
             self.terrain.show_map()
         else:
-            self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon)
+            self.deja_comb = -1 
+            self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon, self.deja_comb)
         self.menu = 0
     
     def open_sac(self):
@@ -144,19 +146,20 @@ class ImageWindow(QMainWindow):
                 if key == 83 :
                     self.terrain.hide()
                     self.sac.show()
-                    self.menu = 1
+                    self.menu = -1
                     
                 
                 
                 self.combat = self.terrain.combat
         else :
             if self.menu == 0:
+                self.deja_comb = -1
                 # print(self.combat)
                 self.terrain.hide()
                 # print(self.combat)
                 self.wild_pokemon = pk.number_to_pokemon(self.combat)
                 self.attaque_p = cb.Combat(self.sac_pokemon)
-                self.fight.show(self.sac_pokemon.objets[0], pk.number_to_pokemon(self.combat))
+                self.fight.show(self.sac_pokemon.objets[0], pk.number_to_pokemon(self.combat), -1)
                 # self.combat_pok()
             
             
@@ -224,39 +227,50 @@ class ImageWindow(QMainWindow):
             self.fight.hide()
             self.menu = 0
             self.terrain.show_map()
+        else:
+            # self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon)
+            pass
             
-    
     
     
     
     def combat_pok (self):
         print(self.combat)
-    
-        
-        if not self.attaque_p.combat_fini :
-            self.fight.att_show(self.sac_pokemon.objets[0], self.wild_pokemon)
+        print(self.deja_comb)
 
-            self.waitForButtonClick()
+        if not self.attaque_p.combat_fini :
+    
+            self.fight.att_show(self.sac_pokemon.objets[0], self.wild_pokemon)
+            self.waitForButtonClick(0)
+            
             self.attaque_p.a = self.type_attaque
             self.attaque_p.attaque_pokemon(self.wild_pokemon)
             
-            self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon)
-
             print(self.wild_pokemon.pv)
             print(self.sac_pokemon.objets[0].pv)
+            
+            self.deja_comb = self.type_attaque[1]
+            print(self.deja_comb)
+            self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon, self.deja_comb)
+            
+
+
+
             
             if self.attaque_p.combat_fini :
                 self.fight.hide()
                 self.combat = 0
                 self.terrain.show_map()
-                
-                
         else :
             print("combat fini")
                 
+        
+                
+
+                
 
         
-    def waitForButtonClick(self):
+    def waitForButtonClick(self,a):
          loop = QEventLoop()
          self.fight.att1.clicked.connect(loop.quit)
          self.fight.att2.clicked.connect(loop.quit)
@@ -271,14 +285,7 @@ class ImageWindow(QMainWindow):
     def set_value_fight(self,val):
         if not self.attaque_p.combat_fini:
             self.type_attaque = val
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     

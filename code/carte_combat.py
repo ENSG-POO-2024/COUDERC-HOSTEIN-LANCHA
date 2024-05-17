@@ -9,7 +9,7 @@ import numpy as np
 import time as tm
 import pandas as pd
 import pokemon as pk
-
+import time as tm
 import os
 
 
@@ -212,12 +212,13 @@ class inter_combat ():
         font.setWeight(75)
         font.setStrikeOut(False)
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
-        
         self.P1_N.setFont(font)
         self.P1_N.setTextFormat(QtCore.Qt.AutoText)
         self.P1_N.setScaledContents(False)
         self.P1_N.setAlignment(QtCore.Qt.AlignCenter)
         self.P1_N.setObjectName("P1_N")
+           
+        
         
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(50, 520, 400, 230))
@@ -392,6 +393,7 @@ class inter_combat ():
         self.att4.setObjectName("ATT4")
         self.att4.hide()
         
+
         
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(430, 400, 391, 111))
@@ -399,12 +401,27 @@ class inter_combat ():
         self.label_3.setPixmap(QtGui.QPixmap("../data/img/combat/HP_1.png"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
+        
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(400, 520, 450, 231))
         self.label_5.setText("")
         self.label_5.setPixmap(QtGui.QPixmap("../data/img/combat/cadre.jpg"))
         self.label_5.setScaledContents(True)
         self.label_5.setObjectName("label_5")
+        
+        
+
+        self.txt_cadre = QtWidgets.QLabel(MainWindow)
+        self.txt_cadre.setGeometry(QtCore.QRect(80, 580, 300, 151))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft JhengHei UI")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.txt_cadre.setFont(font)
+        self.txt_cadre.setObjectName("label_2")
+
+
         self.P1_N.raise_()
         self.label_2.raise_()
         self.P1.raise_()
@@ -420,6 +437,10 @@ class inter_combat ():
         self.pushButton_2.raise_()
         self.pushButton.raise_()
         self.pushButton_3.raise_()
+        self.txt_cadre.raise_()
+        
+        
+        
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow, pok1, pok2)
@@ -438,17 +459,20 @@ class inter_combat ():
         self.P2_N.setText(_translate("MainWindow", pok2.name))
         self.PV1_2.setProperty("value", int(pok1.pv))
         self.PV1_3.setProperty("value", int(pok2.pv))
-        # self.PV1_2.setFormat(_translate("MainWindow", "%p / %m"))
-        # self.PV1_3.setFormat(_translate("MainWindow", "%p / %m"))
         self.label_4.setText(_translate("MainWindow", str(pok1.pv) + "/" + str(pok1.pv_max)))
         self.pushButton.setText(_translate("MainWindow", "FIGHT"))
         self.pushButton_2.setText(_translate("MainWindow", "CAPTURE"))
         self.pushButton_3.setText(_translate("MainWindow", "POKEMON"))
         self.pushButton_4.setText(_translate("MainWindow", "RUN"))
+        self.txt_cadre.setText(_translate("MainWindow", ""))
         self.att1.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[0]]))
         self.att2.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[1]]))
         self.att3.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[2]]))
         self.att4.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[3]]))
+        self.txt_cadre.show()
+        
+        
+
 
     def hide(self):
         
@@ -473,9 +497,9 @@ class inter_combat ():
         self.att2.hide()
         self.att3.hide()
         self.att4.hide()
+        self.txt_cadre.hide()
     
-    
-    def show(self, pok1, pok2):
+    def show(self, pok1, pok2, at):
         # self.pok1 = pk.number_to_pokemon(pok1)
         # self.pok2 = pk.number_to_pokemon(pok2)
         
@@ -483,10 +507,18 @@ class inter_combat ():
         self.indx2 = str((list(list_pokemon.Name).index(pok2.name))+1)
         
         
+        
         _translate = QtCore.QCoreApplication.translate
         # print(list_pokemon.Name[pok2])
         self.P1.setPixmap(QtGui.QPixmap("../data/sprites/dos/"+ self.indx1 +".jpg"))
         self.P2.setPixmap(QtGui.QPixmap("../data/sprites/face/"+self.indx2 +".jpg"))
+        print(at)
+        if at != -1 :
+            self.txt_cadre.setText(_translate("MainWindow", pok1.name + " Utilise " + capacites.Name[pok1.liste_capacites[at]]))
+        else:
+            self.txt_cadre.setText(_translate("MainWindow",""))
+
+        self.txt_cadre.update()
         self.PV1_2.setMaximum(int(pok1.pv_max))
         self.PV1_3.setMaximum(int(pok2.pv_max))
         self.PV1_2.setProperty("value", int(pok1.pv))
@@ -510,11 +542,14 @@ class inter_combat ():
         self.pushButton_3.show()
         self.pushButton_4.show()
         self.label_5.show()
+        self.txt_cadre.show()
         self.att1.hide()
         self.att2.hide()
         self.att3.hide()
         self.att4.hide()
-    
+
+        # self.txt_cadre.hide()
+
 
     def att_hide(self):
         
@@ -522,6 +557,7 @@ class inter_combat ():
         self.att2.hide()
         self.att3.hide()
         self.att4.hide()
+        # self.txt_cadre.hide()
     
     def att_show(self, pok1,pok2):
         _translate = QtCore.QCoreApplication.translate
@@ -534,8 +570,9 @@ class inter_combat ():
         self.att3.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[2]]))
         self.att4.setText(_translate("MainWindow", capacites.Name[pok1.liste_capacites[3]]))
         
+        # self.txt_cadre.setText(_translate("MainWindow", ""))
+            
         
-        _translate = QtCore.QCoreApplication.translate
         # print(list_pokemon.Name[pok2])
         self.P1.setPixmap(QtGui.QPixmap("../data/sprites/dos/"+ self.indx1 +".jpg"))
         self.P2.setPixmap(QtGui.QPixmap("../data/sprites/face/"+self.indx2 +".jpg"))
@@ -566,4 +603,8 @@ class inter_combat ():
         self.att2.show()
         self.att3.show()
         self.att4.show()
+        # self.txt_cadre.show()
+        
+        
 
+    

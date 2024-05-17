@@ -30,7 +30,7 @@ class Combat :
             print(self.a)
                 
             if self.a[0] == 0:
-                #0 indique d'attquer
+                #0 indique d'attaquer
                 #le deuxieme int donne quelle attaque choisir (0 à 3)
                 if self.current_pokemon.checkstate_begin() :
                     # On effectue le test de statut de début de tour
@@ -47,9 +47,10 @@ class Combat :
                 #2 indique une tentative de capture
                 #le deuxième int donne le type de poké ball a utiliser
                 #sa valeur (1, 1.5 ou 2) modifie la probabilité de capture
-                c = ((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) * wild_pokemon.catchrate * self.a[1]) / 255
+                c = (((3 * wild_pokemon.pv_max - 2 * wild_pokemon.pv) / (3 * wild_pokemon.pv_max)) * wild_pokemon.catchrate * self.a[1]) / 255
                 #La probabilité de capturer un pokémon dépend de ses points de vie maximum, de ses points de vie actuels, de son taux de capture
                 #et du type de ball utilisé pour tenter de le catpturer
+                print(c)
                 if random() < c :
                     self.capture = True
                 else :

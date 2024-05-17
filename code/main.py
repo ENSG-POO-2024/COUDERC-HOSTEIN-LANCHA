@@ -1,26 +1,27 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtCore import QEventLoop
 import numpy as np
 import time as tm
 import os
-import carte_combat as c
-from random import randint
-import matplotlib.pyplot as plt
-import matplotlib.image as img
-import fenetre1 as sac_inter
-from melanie import *
+import interface_carte_combat as c
+import interface_sac as sac_inter
+from besace import *
 from PyQt5.Qt import Qt
 import pandas as pd
 import essai_combat as cb
 import pokemon as pk
-from PyQt5.QtCore import QEventLoop, QTimer
+import code_chosir_pokemon as ccp
+import code_terrain as ct
 
+
+
+# les deux lignes sont écrites à cause d'un pb de chemin relatif
 path = os.path.dirname(os.path.abspath(__file__))
 print (path)
 
-
+# ouverture du fichier contenant la liste des pokemon avec leur nom
 
 list_pokemon = pd.read_csv(("../data/pokemon_first_gen.csv"), delimiter = ',')
 
@@ -30,10 +31,8 @@ class ImageWindow(QMainWindow):
     """
     
     
-    def __init__(self, vue, sac_pokemon):
+    def __init__(self, vue):
         """
-        
-
         Parameters
         ----------
         vue : Vue
@@ -45,13 +44,14 @@ class ImageWindow(QMainWindow):
 
         """
         super().__init__()
-        self.vue = vue
-        self.sac_pokemon = sac_pokemon
-        self.combat = 0     #Initialisation du combat
-        self.menu = 0
-        self.type_attaque = [0,0]
-        self.setFocusPolicy(Qt.StrongFocus)
-        self.deja_comb = -1
+        self.sac_pokemon = Sac()                        # On crée un objet de type Sac vide
+        self.vue = vue                                  # On met le terrain visualisé en attribut
+        self.combat = 0                                 # Initialisation du combat
+        self.menu = 0                                   # cet attribut permet de controler quand est ce que les fleches engendrent des actions :
+                                                        # elles ne doivent pas dans les menus 
+        self.type_attaque = [0,0]                       # Cf combat : definit l'action a faire
+        self.setFocusPolicy(Qt.StrongFocus)             # cet attribut permet entre autres de ne pas "sortir" de la fonction qui assigne une action aux touches
+        self.deja_comb = -1                             # gere si on a deja attaqué dans la phase de combat actuelle : -1 = non
         
     def setupUI(self):
         """
@@ -62,18 +62,32 @@ class ImageWindow(QMainWindow):
         None.
 
         """
+        
+        # Définition de notre fenêtre de jeu
+        
+        app = QApplication(sys.argv)
+        mainWin = ccp.MyApp2(self.sac_pokemon)
+        mainWin.show()
+        app.exec_()
+        
         self.setWindowTitle('Pokemon')
         self.setGeometry(150, 150, 900, 820)
 
         self.start = tm.time()
         self.pok1 = pk.number_to_pokemon(25)
         self.pok2 = pk.number_to_pokemon(13)
+        
+        
         # Génération des fenetre terrain et combat        
         self.terrain= c.Carte(self, self.vue)        
-        
         self.terrain.show_map()
         self.fight = c.inter_combat(self, self.pok1, self.pok2)
+        
+        # Initialisation de la phase d'attaque
+        
         self.attaque_p = cb.Combat(self.sac_pokemon)
+        
+        # Attribut gérant le pokemon sauvage attaqué
         self.wild_pokemon = self.pok1
         
         # Génération du sac
@@ -92,6 +106,9 @@ class ImageWindow(QMainWindow):
         
         
     def fuir(self):
+        """
+            Fonction gérant la fuite lors de l'attaque'
+        """
         self.combat = 0
         self.fight.hide()
         self.terrain.show_map()
@@ -99,7 +116,14 @@ class ImageWindow(QMainWindow):
         
 
     def close_sac(self):
+        
+        """
+            Fonction gérant la fermeture du sac'
+        """
+        
         self.sac.hide()
+        
+        # On regarde quelle fenêtre ouvrir selon si on a ouvert le sac en phase d'attaque ou d'exploration
         if self.combat == 0:
             self.terrain.show_map()
         else:
@@ -108,13 +132,14 @@ class ImageWindow(QMainWindow):
         self.menu = 0
     
     def open_sac(self):
+        """
+        ouverture du sac
+        """
         self.fight.att_hide()
         self.fight.hide()
         self.sac.show()
-        self.menu = 1
+        self.menu = 1           # les fleches perdent leur effet
     
-    def show_fight(self):
-        self.fight.att_show(self.sac_pokemon.objets[0], self.wild_pokemon)
     
     def keyPressEvent(self, event):
         """
@@ -143,48 +168,47 @@ class ImageWindow(QMainWindow):
                 
                 self.terrain.show_map()
                 
-                if key == 83 :
+                if key == 83 :                  #Si S presse, ouvrir le sac
                     self.terrain.hide()
                     self.sac.show()
                     self.menu = -1
                     
-                
-                
-                self.combat = self.terrain.combat
+                self.combat = self.terrain.combat  #renvoie 0 si pas de combat et un chiffre entre 1 et 151 correspondant au pokemon attaqué s'il y a un combat
         else :
+            
+            # Si on est en phase de combat et que le menu n'est pas ouvert
             if self.menu == 0:
                 self.deja_comb = -1
-                # print(self.combat)
-                self.terrain.hide()
-                # print(self.combat)
-                self.wild_pokemon = pk.number_to_pokemon(self.combat)
-                self.attaque_p = cb.Combat(self.sac_pokemon)
-                self.fight.show(self.sac_pokemon.objets[0], pk.number_to_pokemon(self.combat), -1)
-                # self.combat_pok()
+                self.terrain.hide() # on cache l'interface d'attaque
+                self.wild_pokemon = pk.number_to_pokemon(self.combat)    # On change la valeur de wild_pokemon pour lui donner celle du pok qu'on combat
+                self.attaque_p = cb.Combat(self.sac_pokemon)            # on maj l'attaque
+                self.fight.show(self.sac_pokemon.objets[0], pk.number_to_pokemon(self.combat), -1)  # On ouvre l'interface de combat
             
             
     def monter(self):
+        # cette fonction gère position du pokemon dans le sac lorsque l'on clique sur "monter". Elle modifie l'ordre du sac
          rang_selectionnes = [index.row() for index in self.sac.listWidget.selectedIndexes()]
          for rang in rang_selectionnes :
              if rang > 0:
                  nouveau_rang = rang - 1
                  self.sac.listWidget.insertItem(nouveau_rang, self.sac.listWidget.takeItem(rang))
                  self.sac.listWidget.setCurrentRow(nouveau_rang)
-                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
-                 #print(sac_pokemon)
+                 self.sac_pokemon.changer_place(self.sac_pokemon.objets[rang], nouveau_rang)
                  
         
     def descendre(self):        
+        # ette fonction gère position du pokemon dans le sac lorsque l'on clique sur "descendre". Elle modifie l'ordre du sac
          rang_selectionnes = [index.row() for index in self.sac.listWidget.selectedIndexes()]
          for rang in reversed(rang_selectionnes) :
              if rang < self.sac.listWidget.count()-1 :
                  nouveau_rang = rang+1
                  self.sac.listWidget.insertItem(nouveau_rang, self.sac.listWidget.takeItem(rang))
                  self.sac.listWidget.setCurrentRow(nouveau_rang) 
-                 sac_pokemon.changer_place(sac_pokemon.objets[rang], nouveau_rang)
-                 #print(sac_pokemon)
+                 self.sac_pokemon.changer_place(self.sac_pokemon.objets[rang], nouveau_rang)
     
     def button_action(self):
+        
+        # Définit les actions associées aux boutons lors de l'attaque d'un pokemon
         
         # self.fight.pushButton_4.clicked.connect(self.fuir)
         self.sac.pushButton_1.clicked.connect(self.monter)
@@ -201,21 +225,25 @@ class ImageWindow(QMainWindow):
         self.fight.att3.clicked.connect(lambda: self.set_value_fight([0,2]))
         self.fight.att4.clicked.connect(lambda: self.set_value_fight([0,3]))
         
-        
-        # self.fight.pushButton_3.clicked.connect(self.open_sac)
-        # self.fight.pushButton.clicked.connect(self.combat_pok)
+
     
     def fuite_pok(self):
+        """
+        Gère les tentatives de fuites : si fonctionne, active la fonction fuir
+        """
         self.type_attaque = [3,0]
         self.attaque_p.a = self.type_attaque
         self.attaque_p.attaque_pokemon(self.wild_pokemon)
         if self.attaque_p.fuite or self.attaque_p.combat_fini:
-            self.fuir()
+            self.fuir()                                                 # fuite réussie
         else:
             pass
     
     def capt_pok (self):
-        print("ici, c'est bon !")
+        """
+        Gère les tentatives de capture 
+        """
+        
         self.type_attaque = [2,1]
         self.attaque_p.a = self.type_attaque
         self.attaque_p.attaque_pokemon(self.wild_pokemon)
@@ -228,35 +256,31 @@ class ImageWindow(QMainWindow):
             self.menu = 0
             self.terrain.show_map()
         else:
-            # self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon)
-            pass
+            self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon, self.deja_comb)
             
     
     
     
     def combat_pok (self):
-        print(self.combat)
-        print(self.deja_comb)
+        # Fonction gérant les différentes attaques, l'affichage des interfaces de combat
 
-        if not self.attaque_p.combat_fini :
+        if not self.attaque_p.combat_fini :             # On arrête le combat sinon
     
-            self.fight.att_show(self.sac_pokemon.objets[0], self.wild_pokemon)
-            self.waitForButtonClick(0)
+            self.fight.att_show(self.sac_pokemon.objets[0], self.wild_pokemon)      # affichage des 4 attaques
+            self.waitForButtonClick(0)                                              # attendre la selection d'une attaque
             
             self.attaque_p.a = self.type_attaque
-            self.attaque_p.attaque_pokemon(self.wild_pokemon)
+            self.attaque_p.attaque_pokemon(self.wild_pokemon)                       # appliquer l'attaque choisie
             
-            print(self.wild_pokemon.pv)
-            print(self.sac_pokemon.objets[0].pv)
+            # print(self.wild_pokemon.pv)
+            # print(self.sac_pokemon.objets[0].pv)
             
             self.deja_comb = self.type_attaque[1]
             print(self.deja_comb)
             self.fight.show(self.sac_pokemon.objets[0], self.wild_pokemon, self.deja_comb)
-            
 
 
-
-            
+            # si le combat se termine, cacher les boutons inutiles
             if self.attaque_p.combat_fini :
                 self.fight.hide()
                 self.combat = 0
@@ -267,10 +291,8 @@ class ImageWindow(QMainWindow):
         
                 
 
-                
-
-        
     def waitForButtonClick(self,a):
+        # fonction qui gère l'attente d'un bouton cliqué
          loop = QEventLoop()
          self.fight.att1.clicked.connect(loop.quit)
          self.fight.att2.clicked.connect(loop.quit)
@@ -283,87 +305,9 @@ class ImageWindow(QMainWindow):
          loop.exec_()
     
     def set_value_fight(self,val):
+        # donne la valeur à type_attaque en fct du bouton
         if not self.attaque_p.combat_fini:
             self.type_attaque = val
-
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Vue:
-    
-    def __init__(self,carte,x0,y0): # A modifier (doit dependre de la pos de red)
-        self.x = x0
-        self.y = y0
-        self.monde = carte
-        self.biome_red = carte[x0,y0]
-        self.combat = 0
-        self.tuiles =  os.listdir(os.path.join(path,"../data/img/"))
-        self.map_init = (os.path.join(path,"../data/init.png"))
-        self.matrice = np.copy(self.monde[self.x - 4 : self.x + 5, self.y - 5 : self.y + 5])
-        self.obstacle = [3,7,10,11,12,13,14,15]
-    
-    def genere_matrice(self):
-        
-        matrice  = np.copy(self.monde[self.x - 4 : self.x + 5, self.y - 5 : self.y + 5])
-        self.biome_red = matrice[4,4]
-        matrice[4,4] = int(str(99) + str(self.biome_red))
-        self.matrice = matrice
-        return matrice
-    
-    def genere_terrain (self):
-        result = np.zeros((16*9, 16 * 10, 4)) # vue vierge
-        matrice = self.genere_matrice()
-        for i in range(matrice.shape[0]):
-            for j in range(matrice.shape[1]):
-                result[i*16:(i+1)*16, j*16:(j+1)*16,:] =  img.imread((os.path.join(path,"../data/img/"))+ str(matrice[i,j])+".png")# A terme utiliser un DICO avec les img reliees aux nb dans la matrice
-
-        
-        plt.imsave((os.path.join(path,"../data/map.jpg")), result)
-        self.map_init = (os.path.join(path,"../data/map.jpg"))
-    
-    def hautes_herbes(self):
-        if self.biome_red == 1 or self.biome_red == 8:
-            if randint(1, 15) == 5:
-                return randint(1,151)
-        return 0
-    
-    def deplacement(self,direction):
-        x_max, y_max = self.monde.shape
-        if direction == "b" and self.x + 5 < x_max :
-            if self.matrice[5,4] not in self.obstacle :
-                self.x += 1
-            self.genere_terrain()
-        elif direction == "d" and self.y + 5  < y_max :
-            if self.matrice[4,5] not in self.obstacle :
-                self.y += 1
-            self.genere_terrain()
-        elif direction == "h" and self.x -4 > 0 :
-            if self.matrice[3,4] not in self.obstacle :
-                self.x -= 1
-            self.genere_terrain()
-        elif direction == "g" and self.y -5 > 0 :
-            if self.matrice[4,3] not in self.obstacle :
-                self.y -= 1
-            self.genere_terrain()
-        self.combat = self.biome_red
 
 
 if __name__ == '__main__':
@@ -371,7 +315,7 @@ if __name__ == '__main__':
     matrix = np.genfromtxt((os.path.join(path,"../data/terrain.csv")), delimiter=';',dtype=int)
     
     
-    sac_pokemon = Sac()
+    # sac_pokemon = Sac()
     # pokemon1 = pk.number_to_pokemon(25)
     # pokemon2 = pk.number_to_pokemon(30)
     # pokemon3 = pk.number_to_pokemon(40)
@@ -379,9 +323,9 @@ if __name__ == '__main__':
     # sac_pokemon.capture_pokemon(pokemon2)
     # sac_pokemon.capture_pokemon(pokemon3)
     
-    MAPP = Vue(matrix,30,15)
+    MAPP = ct.Vue(matrix,30,15)
     app = QtWidgets.QApplication(sys.argv)
-    ui = ImageWindow(MAPP, sac_pokemon)
+    ui = ImageWindow(MAPP)
     ui.setupUI()
     ui.show()
     sys.exit(app.exec_())

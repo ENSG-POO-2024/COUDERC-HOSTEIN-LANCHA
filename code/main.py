@@ -217,11 +217,11 @@ class ImageWindow(QMainWindow):
         self.attaque_p.a = self.type_attaque
         self.attaque_p.attaque_pokemon(self.wild_pokemon)
         if self.wild_pokemon.pv <= 0 or self.attaque_p.capture:
+            self.combat = 0 
             self.sac_pokemon.capture_pokemon(self.wild_pokemon)
             # self.sac.hide()
             print(self.sac_pokemon)
             self.fight.hide()
-            self.combat = 0 
             self.menu = 0
             self.terrain.show_map()
             
@@ -308,6 +308,7 @@ class Vue:
         self.tuiles =  os.listdir(os.path.join(path,"../data/img/"))
         self.map_init = (os.path.join(path,"../data/init.png"))
         self.matrice = np.copy(self.monde[self.x - 4 : self.x + 5, self.y - 5 : self.y + 5])
+        self.obstacle = [3,7,10,11,12,13,14,15]
     
     def genere_matrice(self):
         
@@ -329,7 +330,7 @@ class Vue:
         self.map_init = (os.path.join(path,"../data/map.jpg"))
     
     def hautes_herbes(self):
-        if self.biome_red == 1 :
+        if self.biome_red == 1 or self.biome_red == 8:
             if randint(1, 15) == 5:
                 return randint(1,151)
         return 0
@@ -337,19 +338,19 @@ class Vue:
     def deplacement(self,direction):
         x_max, y_max = self.monde.shape
         if direction == "b" and self.x + 5 < x_max :
-            if self.matrice[5,4] != 3 :
+            if self.matrice[5,4] not in self.obstacle :
                 self.x += 1
             self.genere_terrain()
         elif direction == "d" and self.y + 5  < y_max :
-            if self.matrice[4,5] != 3 :
+            if self.matrice[4,5] not in self.obstacle :
                 self.y += 1
             self.genere_terrain()
         elif direction == "h" and self.x -4 > 0 :
-            if self.matrice[3,4] != 3 :
+            if self.matrice[3,4] not in self.obstacle :
                 self.x -= 1
             self.genere_terrain()
         elif direction == "g" and self.y -5 > 0 :
-            if self.matrice[4,3] != 3 :
+            if self.matrice[4,3] not in self.obstacle :
                 self.y -= 1
             self.genere_terrain()
         self.combat = self.biome_red
